@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FlexPort — Zero-U Cable Management · Roux Labs</title>
+<link rel="icon" type="image/png" href="assets/img/logo-roux.png">
+<meta name="description" content="Configure your FlexPort: colorway, set size, and Left or Right orientation. Zero-U cable management. Made in the USA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/polish-pdp.css">
+</head>
+<body class="page-pdp">
+
+<header class="site-header" data-roux-header></header>
+
+<div class="container pdp-breadcrumb">
+  <div class="crumbs">
+    <a href="index.html">home</a><span class="sep">/</span><a href="shop.html">shop</a><span class="sep">/</span><span class="here">flexport zero-u</span>
+  </div>
+</div>
+
+<section class="pdp">
+  <div class="pdp-gallery">
+    <div class="hero-shot" data-pdp-hero></div>
+    <div class="pdp-thumbs" data-pdp-thumbs></div>
+  </div>
+
+  <div class="pdp-info">
+    <h1>FlexPort<br>Zero-U Panel</h1>
+    <p class="lead" data-pdp-lead></p>
+    <div class="pdp-price" data-pdp-price>$69.95</div>
+
+    <div class="pdp-section">
+      <h3>Colorway</h3>
+      <div class="variant-row" data-pdp-colors></div>
+      <dl class="color-code-key">
+        <div><dt><span class="swatch red"></span></dt><dd>public safety</dd></div>
+        <div><dt><span class="swatch orange"></span></dt><dd>cameras</dd></div>
+        <div><dt><span class="swatch white"></span></dt><dd>data</dd></div>
+        <div><dt><span class="swatch black"></span></dt><dd>general use</dd></div>
+      </dl>
+    </div>
+
+    <div class="pdp-section">
+      <h3>Orientation</h3>
+      <div class="orientation-toggle" data-pdp-orient></div>
+    </div>
+
+    <div class="pdp-section">
+      <h3>Set Size</h3>
+      <div class="variant-row" data-pdp-sets></div>
+    </div>
+
+    <div class="pdp-section">
+      <h3>Quantity</h3>
+      <div class="qty-stepper" style="display:inline-flex">
+        <button data-qty-dec aria-label="Decrease">−</button>
+        <span class="val" data-qty-val>1</span>
+        <button data-qty-inc aria-label="Increase">+</button>
+      </div>
+    </div>
+
+    <div class="pdp-section">
+      <button class="btn btn-orange btn-block" data-pdp-add>Add To Cart · <span data-pdp-add-price>$69.95</span></button>
+      <div class="pdp-microcopy">ships in 3 business days · free shipping over $150</div>
+    </div>
+
+    <div class="pdp-section">
+      <h3>Specifications</h3>
+      <dl class="specs" data-pdp-specs></dl>
+      <div class="pdp-sku-line"><span class="lbl">sku</span><span class="val" data-pdp-sku>FP-BK-04-L</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="feature-grid" data-feature-grid></div>
+
+<!-- Install context -->
+<section class="install">
+  <div class="install-grid">
+    <div class="install-copy">
+      <div class="eyebrow">In The Field</div>
+      <h2 class="h-lg">Tested On Live Racks</h2>
+      <p class="lead">
+        Developed and field-tested by Datastrait Networks across MN, WI, IL, SD, and ND.
+        Real installs, real loads, real labels you can read at arm's length.
+      </p>
+    </div>
+    <div class="install-img" style="background-image:url('assets/img/install-flexport-detail.jpg')"></div>
+  </div>
+</section>
+
+<footer class="site-footer" data-roux-footer></footer>
+
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script>
+(function(){
+    const PRODUCT = window.ROUX.findProduct("flexport-zero-u");
+    const state = Object.assign({}, PRODUCT.defaults, { qty: 1 });
+
+    const el = {
+        hero: document.querySelector("[data-pdp-hero]"),
+        thumbs: document.querySelector("[data-pdp-thumbs]"),
+        lead: document.querySelector("[data-pdp-lead]"),
+        price: document.querySelector("[data-pdp-price]"),
+        addPrice: document.querySelector("[data-pdp-add-price]"),
+        colors: document.querySelector("[data-pdp-colors]"),
+        orient: document.querySelector("[data-pdp-orient]"),
+        sets: document.querySelector("[data-pdp-sets]"),
+        specs: document.querySelector("[data-pdp-specs]"),
+        sku: document.querySelector("[data-pdp-sku]"),
+        qtyVal: document.querySelector("[data-qty-val]"),
+        add: document.querySelector("[data-pdp-add]"),
+        features: document.querySelector("[data-feature-grid]")
+    };
+
+    el.lead.textContent = PRODUCT.copy.lead;
+    el.specs.innerHTML = PRODUCT.specs.map(function(s){
+        return '<dt>' + s[0] + '</dt><dd>' + s[1] + '</dd>';
+    }).join("");
+
+    el.features.innerHTML = PRODUCT.copy.features.map(function(f){
+        return '<article class="feature-card">'
+             + '<div class="num">' + f.num + ' / Feature</div>'
+             + '<h3>' + f.title + '</h3>'
+             + '<p>' + f.body + '</p>'
+             + '</article>';
+    }).join("");
+
+    function currentPrice(){
+        const set = PRODUCT.sets.find(function(s){ return s.size === state.set; });
+        return set ? set.price * state.qty : PRODUCT.priceFrom;
+    }
+
+    function render(){
+        // Colors
+        el.colors.innerHTML = PRODUCT.colors.map(function(c){
+            return '<button class="variant-chip' + (state.color === c.key ? ' active' : '') + '" data-set-color="' + c.key + '">'
+                 + '<span class="swatch ' + c.swatchClass + '"></span>' + c.label
+                 + '</button>';
+        }).join("");
+
+        // Orientation L/R
+        el.orient.innerHTML = PRODUCT.orientations.map(function(o){
+            return '<div class="opt' + (state.orientation === o.key ? ' active' : '') + '" data-set-orient="' + o.key + '">'
+                 + '<span>' + o.label + '</span>'
+                 + '<span class="sub">' + o.sub + '</span>'
+                 + '</div>';
+        }).join("");
+
+        // Sets
+        el.sets.innerHTML = PRODUCT.sets.map(function(s){
+            return '<button class="variant-chip' + (state.set === s.size ? ' active' : '') + '" data-set-size="' + s.size + '">'
+                 + 'Set of ' + s.size + ' · ' + window.ROUX.formatPrice(s.price)
+                 + '</button>';
+        }).join("");
+
+        // Hero + thumbs
+        el.hero.innerHTML = window.ROUX.productSvg(PRODUCT.id, state.color, state.set);
+        el.thumbs.innerHTML = PRODUCT.colors.map(function(c){
+            return '<div class="thumb' + (state.color === c.key ? ' active' : '') + '" data-set-color="' + c.key + '">'
+                 + window.ROUX.productSvg(PRODUCT.id, c.key, state.set)
+                 + '</div>';
+        }).join("");
+
+        // Price + SKU + qty
+        el.price.textContent = window.ROUX.formatPrice(currentPrice() / state.qty);
+        el.addPrice.textContent = window.ROUX.formatPrice(currentPrice());
+        el.sku.textContent = window.ROUX.makeSku(PRODUCT.id, state.color, state.orientation, state.set);
+        el.qtyVal.textContent = String(state.qty);
+    }
+
+    document.addEventListener("click", function(e){
+        const c = e.target.closest("[data-set-color]");   if (c){ state.color = c.getAttribute("data-set-color"); render(); }
+        const o = e.target.closest("[data-set-orient]");  if (o){ state.orientation = o.getAttribute("data-set-orient"); render(); }
+        const s = e.target.closest("[data-set-size]");    if (s){ state.set = parseInt(s.getAttribute("data-set-size"),10); render(); }
+        if (e.target.closest("[data-qty-inc]")){ state.qty = Math.min(99, state.qty + 1); render(); }
+        if (e.target.closest("[data-qty-dec]")){ state.qty = Math.max(1, state.qty - 1); render(); }
+        if (e.target.closest("[data-pdp-add]")){
+            const set = PRODUCT.sets.find(function(x){ return x.size === state.set; });
+            const colorMeta = PRODUCT.colors.find(function(x){ return x.key === state.color; });
+            const orientMeta = PRODUCT.orientations.find(function(x){ return x.key === state.orientation; });
+            window.ROUX.cart.add({
+                sku: window.ROUX.makeSku(PRODUCT.id, state.color, state.orientation, state.set),
+                productId: PRODUCT.id,
+                name: PRODUCT.name + " · Set of " + state.set,
+                color: colorMeta.label,
+                orientation: orientMeta.label,
+                setSize: state.set,
+                price: set.price,
+                qty: state.qty
+            });
+        }
+    });
+
+    render();
+})();
+</script>
+</body>
+</html>

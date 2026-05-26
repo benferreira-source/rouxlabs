@@ -1,0 +1,331 @@
+/* ============================================================
+   ROUX LABS — PDP Polish Layer
+   --------------------------------------------------------------
+   Scoped to body.page-pdp so it cannot leak into other pages.
+   Applies a Supreme-style minimalism pass on top of pages.css:
+   - quieter, tighter, hairline-driven
+   - kills decorative orange strip & loud badge pills
+   - tightens the feature/install blocks into spec cards
+   - single orange accent reserved for Add-To-Cart button
+   ============================================================ */
+
+/* ---- Breadcrumb: smaller, quieter ------------------------------ */
+body.page-pdp .pdp-breadcrumb{
+    padding-top: var(--s-3);
+    padding-bottom: var(--s-2);
+}
+body.page-pdp .pdp-breadcrumb .crumbs{
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: lowercase;
+    color: var(--grey-500);
+}
+body.page-pdp .pdp-breadcrumb .crumbs a{
+    color: var(--grey-500);
+    border-bottom: 1px solid transparent;
+}
+body.page-pdp .pdp-breadcrumb .crumbs a:hover{
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+}
+body.page-pdp .pdp-breadcrumb .crumbs .here{ color: var(--ink); }
+body.page-pdp .pdp-breadcrumb .crumbs .sep{ color: var(--grey-300); margin: 0 6px; }
+
+/* ---- PDP grid: keep edge-to-edge hairline frame, slimmer gallery -- */
+body.page-pdp .pdp{
+    border-top: 1px solid var(--line);
+}
+body.page-pdp .pdp-gallery{
+    padding: var(--s-6);
+    min-height: 0;
+    gap: var(--s-3);
+    border-right: 1px solid var(--line);
+}
+body.page-pdp .pdp-gallery .hero-shot{
+    border: 0;
+    background: var(--paper);
+}
+body.page-pdp .pdp-gallery .hero-shot svg,
+body.page-pdp .pdp-gallery .hero-shot img{
+    max-width: 78%;
+    max-height: 78%;
+}
+body.page-pdp .pdp-thumbs{ gap: var(--s-2); }
+body.page-pdp .pdp-thumbs .thumb{
+    border: 1px solid var(--line);
+    transition: border-color .12s ease;
+}
+body.page-pdp .pdp-thumbs .thumb:hover{ border-color: var(--grey-500); }
+body.page-pdp .pdp-thumbs .thumb.active{ border-color: var(--ink); border-width: 1px; outline: 1px solid var(--ink); outline-offset: -2px; }
+
+/* ---- Info column: tighter typographic ladder ------------------- */
+body.page-pdp .pdp-info{
+    padding: var(--s-6);
+    gap: var(--s-4);
+}
+body.page-pdp .pdp-info h1{
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.1;
+    letter-spacing: -.005em;
+}
+body.page-pdp .pdp-info p.lead{
+    color: var(--grey-700);
+    font-size: 13px;
+    line-height: 1.55;
+    max-width: 52ch;
+    margin: 0;
+}
+body.page-pdp .pdp-price{
+    font-family: var(--f-mono);
+    font-size: 14px;
+    letter-spacing: .04em;
+    color: var(--ink);
+}
+
+/* Tag pills above headline: keep one line of mono microcopy, not
+   loud bordered chips. The product.html badge row uses .tag-solid
+   which feels heavy — knock it back to outline + small. */
+body.page-pdp .pdp-info .tag,
+body.page-pdp .pdp-info .tag-solid{
+    background: var(--paper);
+    color: var(--grey-700);
+    border: 1px solid var(--line);
+    padding: 3px 6px;
+    font-size: 9px;
+    letter-spacing: .16em;
+    margin-right: 4px;
+    text-transform: uppercase;
+}
+
+/* ---- Sections: thinner hairlines, less vertical padding -------- */
+body.page-pdp .pdp-section{
+    border-top: 1px solid var(--line);
+    padding-top: var(--s-3);
+}
+body.page-pdp .pdp-section h3{
+    font-family: var(--f-mono);
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin-bottom: var(--s-3);
+}
+
+/* ---- Variant chips: lighter borders, hover quieter -------------- */
+body.page-pdp .variant-chip{
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: var(--paper);
+    font-weight: 400;
+    padding: 7px 11px;
+    transition: border-color .12s ease, background .12s ease, color .12s ease;
+}
+body.page-pdp .variant-chip:hover{ border-color: var(--ink); background: var(--paper); }
+body.page-pdp .variant-chip.active{ background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* ---- Orientation toggle: hairline, plain Inter, not Archivo ----- */
+body.page-pdp .orientation-toggle{ border: 1px solid var(--line); }
+body.page-pdp .orientation-toggle .opt{
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: var(--s-3);
+    border-right: 1px solid var(--line);
+}
+body.page-pdp .orientation-toggle .opt:last-child{ border-right: 0; }
+body.page-pdp .orientation-toggle .opt .sub{
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: none;
+    color: var(--grey-500);
+    opacity: 1;
+}
+body.page-pdp .orientation-toggle .opt.active{ background: var(--ink); color: var(--paper); }
+body.page-pdp .orientation-toggle .opt.active .sub{ color: var(--grey-300); }
+
+/* ---- Qty stepper: hairline outline ------------------------------ */
+body.page-pdp .qty-stepper{ border-color: var(--ink); }
+
+/* ---- Add to cart: keep the orange, tighten typography ----------- */
+body.page-pdp .btn.btn-orange{
+    padding: 14px 20px;
+    font-size: 11px;
+    letter-spacing: .18em;
+}
+
+/* Microcopy under the button: smaller, quieter, lowercase mono */
+body.page-pdp .pdp-microcopy{
+    margin-top: var(--s-3);
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: .16em;
+    text-transform: lowercase;
+    color: var(--grey-500);
+    text-align: center;
+}
+
+/* ---- Specs: clean two-column, no wrap clipping ------------------ */
+body.page-pdp .specs{
+    border-top: 0;
+    padding-top: 0;
+    grid-template-columns: 1fr 1.4fr;
+    column-gap: var(--s-4);
+}
+body.page-pdp .specs dt,
+body.page-pdp .specs dd{
+    font-size: 10px;
+    letter-spacing: .08em;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.4;
+}
+body.page-pdp .specs dt{
+    color: var(--grey-700);
+    text-transform: uppercase;
+}
+body.page-pdp .specs dd{
+    text-align: right;
+    color: var(--ink);
+    word-break: normal;
+    overflow-wrap: anywhere;
+}
+
+/* ---- SKU block: just a single mono line, no big h3 -------------- */
+body.page-pdp .pdp-sku-line{
+    margin-top: var(--s-2);
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+}
+body.page-pdp .pdp-sku-line .lbl{ color: var(--grey-500); margin-right: var(--s-2); }
+body.page-pdp .pdp-sku-line .val{ color: var(--ink); }
+
+/* ============================================================
+   FEATURE CARDS — make them spec-card-y, not marketing-y
+   ============================================================ */
+body.page-pdp .feature-grid{
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+body.page-pdp .feature-card{
+    padding: var(--s-5);
+    border-right: 1px solid var(--line);
+    min-height: 0;
+    gap: var(--s-2);
+}
+body.page-pdp .feature-card .num{
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+}
+body.page-pdp .feature-card h3{
+    font-family: var(--f-body);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.25;
+    letter-spacing: -.005em;
+    text-transform: none;
+    color: var(--ink);
+}
+body.page-pdp .feature-card p{
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--grey-700);
+    margin: 0;
+}
+
+/* ============================================================
+   INSTALL SECTION — quieter eyebrow + headline, looser image
+   ============================================================ */
+body.page-pdp .install{
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
+}
+body.page-pdp .install-copy{
+    padding: var(--s-7) var(--gutter);
+    gap: var(--s-3);
+}
+body.page-pdp .install-copy .eyebrow{
+    color: var(--grey-500);
+    font-size: 9px;
+    letter-spacing: .2em;
+}
+body.page-pdp .install-copy h2{
+    font-size: clamp(18px, 2vw, 24px);
+    letter-spacing: -.005em;
+}
+body.page-pdp .install-copy p.lead{
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--grey-700);
+    max-width: 52ch;
+    margin: 0;
+}
+body.page-pdp .install-img{ border-left: 1px solid var(--line); }
+@media (max-width: 900px){
+    body.page-pdp .install-img{ border-left: 0; border-top: 1px solid var(--line); }
+}
+
+/* ============================================================
+   MOBILE — keep mobile clean and quiet
+   ============================================================ */
+@media (max-width: 900px){
+    body.page-pdp .pdp-gallery{
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: var(--s-4);
+    }
+    body.page-pdp .pdp-info{ padding: var(--s-5) var(--gutter); gap: var(--s-3); }
+    body.page-pdp .pdp-info h1{ font-size: 22px; }
+    body.page-pdp .feature-card{ border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 540px){
+    body.page-pdp .pdp-thumbs{ grid-template-columns: repeat(4, 1fr); }
+    body.page-pdp .orientation-toggle .opt{ padding: var(--s-3) var(--s-2); }
+}
+
+/* ============================================================
+   COLORWAY CODE KEY — installer color convention from the
+   patent doc (Red=public safety, Orange=cameras, White=data,
+   Black=general use). Surfaces a real product semantic.
+   ============================================================ */
+body.page-pdp .color-code-key{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 16px;
+    margin: 12px 0 0;
+    padding: 12px 0 0;
+    border-top: 1px solid var(--line);
+}
+body.page-pdp .color-code-key > div{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+body.page-pdp .color-code-key dt,
+body.page-pdp .color-code-key dd{
+    margin: 0;
+    padding: 0;
+}
+body.page-pdp .color-code-key dt{
+    display: inline-flex;
+    align-items: center;
+}
+body.page-pdp .color-code-key dd{
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+}
+@media (max-width: 540px){
+    body.page-pdp .color-code-key{ grid-template-columns: 1fr; }
+}

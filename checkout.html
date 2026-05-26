@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checkout — Roux Labs</title>
+<link rel="icon" type="image/png" href="assets/img/logo-roux.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/polish-secondary.css">
+</head>
+<body class="page-checkout">
+<header class="site-header" data-roux-header></header>
+
+<section class="page-pad">
+  <div class="container">
+    <div class="eyebrow">Checkout</div>
+    <h1>REVIEW &amp; PAY.</h1>
+    <p class="sub">Stripe-secured · Continental US</p>
+
+    <div class="two-col">
+      <div data-checkout-items>
+        <!-- items rendered here -->
+      </div>
+      <aside>
+        <div class="callout">
+          <h2 class="h-md">Order Summary</h2>
+          <div class="totals" data-checkout-totals></div>
+          <button class="btn btn-orange btn-block mt-5" data-checkout-go>Pay with Stripe →</button>
+          <div class="mono mt-3 center" style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--grey-500)">
+            You will be taken to Stripe to complete payment.<br>
+            Roux Labs never sees your card.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" data-roux-footer></footer>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

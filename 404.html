@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Not Found · Roux Labs</title>
+<link rel="icon" type="image/png" href="assets/img/logo-roux.png">
+<meta name="description" content="The page you're looking for doesn't exist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<style>
+  body.page-404 .nf-wrap{
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--s-8) var(--gutter);
+    gap: var(--s-4);
+  }
+  body.page-404 .nf-eyebrow{
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+  }
+  body.page-404 .nf-code{
+    font-family: var(--f-display);
+    font-size: clamp(96px, 18vw, 220px);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+  }
+  body.page-404 .nf-headline{
+    font-family: var(--f-display);
+    font-size: clamp(24px, 4vw, 40px);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  body.page-404 .nf-copy{
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--grey-700);
+    max-width: 44ch;
+    margin: 0;
+  }
+  body.page-404 .nf-actions{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--s-3);
+  }
+</style>
+</head>
+<body class="page-404">
+<header class="site-header" data-roux-header></header>
+
+<section class="nf-wrap">
+  <div class="nf-eyebrow">Error · Not Found</div>
+  <div class="nf-code">404</div>
+  <div class="nf-headline">This rack unit is empty.</div>
+  <p class="nf-copy">The page you're looking for doesn't exist. Could be a typo, a stale link, or something we moved. Head back to the shop or try one of these.</p>
+  <div class="nf-actions">
+    <a href="index.html" class="btn">← Home</a>
+    <a href="shop.html" class="btn btn-ghost">Shop</a>
+    <a href="flexport.html" class="btn btn-ghost">FlexPort</a>
+  </div>
+</section>
+
+<footer class="site-footer" data-roux-footer></footer>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+</body>
+</html>

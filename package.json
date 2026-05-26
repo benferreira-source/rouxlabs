@@ -1,0 +1,13 @@
+{
+  "name": "roux-labs-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Roux Labs e-commerce site — FlexPort and accessories.",
+  "scripts": {
+    "dev":   "npx http-server -p 4321 -c-1",
+    "start": "npx http-server -p 4321 -c-1"
+  },
+  "dependencies": {
+    "stripe": "^16.0.0"
+  }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Order Confirmed — Roux Labs</title>
+<link rel="icon" type="image/png" href="assets/img/logo-roux.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/polish-secondary.css">
+</head>
+<body class="page-success">
+<header class="site-header" data-roux-header></header>
+
+<section class="page-pad">
+  <div class="container">
+    <div class="callout" style="margin:0 auto">
+      <div class="eyebrow">Order Confirmed</div>
+      <h1>THANK YOU.</h1>
+      <p class="lead">Your FlexPort set is in the queue. You'll get a confirmation email within minutes and a shipping notice within three business days.</p>
+      <div class="specs">
+        <dt>Order Status</dt><dd>Received</dd>
+        <dt>Confirmation</dt><dd>Email Sent</dd>
+        <dt>Shipping</dt><dd>USPS · 2–3 days</dd>
+        <dt>Support</dt><dd><a href="mailto:support@rouxlabs.com">support@rouxlabs.com</a></dd>
+      </div>
+      <div class="flex gap-3 mt-6">
+        <a href="shop.html" class="btn">Back to Shop</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" data-roux-footer></footer>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script>
+/* Clear cart on a successful return */
+if (new URLSearchParams(location.search).get("status") === "ok" || location.search.includes("demo=1")){
+    window.ROUX.cart.clear();
+}
+</script>
+</body>
+</html>

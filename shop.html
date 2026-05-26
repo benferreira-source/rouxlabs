@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shop — Roux Labs</title>
+<link rel="icon" type="image/png" href="assets/img/logo-roux.png">
+<meta name="description" content="Shop FlexPort cable management systems, accessories, and more from Roux Labs. Hardware made in the USA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body class="page-shop">
+<header class="site-header" data-roux-header></header>
+
+<div class="shop-head mono">
+  <span class="shop-head-label" data-shop-heading>shop · all products</span>
+  <span class="shop-head-sep">·</span>
+  <span data-shop-count></span>
+</div>
+
+<div class="shop-filter-row" data-shop-filter></div>
+
+<div class="product-grid" data-shop-grid></div>
+
+<footer class="site-footer" data-roux-footer></footer>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script>
+(function(){
+    const params = new URLSearchParams(location.search);
+    const cat = params.get("cat");
+    const filters = [
+        { key: null, label: "All" },
+        { key: "flexport", label: "FlexPort" },
+        { key: "accessories", label: "Accessories" }
+    ];
+    const filterEl = document.querySelector("[data-shop-filter]");
+    filterEl.innerHTML = filters.map(function(f){
+        const active = (cat || null) === f.key ? " is-active" : "";
+        const href = f.key ? "shop.html?cat=" + f.key : "shop.html";
+        return '<a href="' + href + '" class="shop-filter' + active + '">' + f.label.toLowerCase() + '</a>';
+    }).join("");
+
+    const list = cat
+        ? window.ROUX_PRODUCTS.filter(function(p){ return p.category === cat; })
+        : window.ROUX_PRODUCTS;
+
+    // Refresh heading + count
+    const headLabel = cat
+        ? "shop · " + cat
+        : "shop · all products";
+    document.querySelector("[data-shop-heading]").textContent = headLabel;
+    document.querySelector("[data-shop-count]").textContent = list.length + " product" + (list.length === 1 ? "" : "s");
+
+    const grid = document.querySelector("[data-shop-grid]");
+    grid.innerHTML = list.map(function(p){
+        const href = p.id === "flexport-zero-u" ? "flexport.html" : "product.html?id=" + p.id;
+        const swatches = (p.colors || []).map(function(c){ return '<span class="swatch ' + c.swatchClass + '"></span>'; }).join("");
+        return `
+            <a class="product-card" href="${href}">
+              <div class="badge-row">
+                ${(p.badges || []).slice(0,1).map(function(b){ return '<span class="tag tag-solid">' + b + '</span>'; }).join("")}
+              </div>
+              <div class="image">${window.ROUX.productSvg(p.id, (p.colors[0]||{}).key)}</div>
+              <div class="label">
+                <div class="name">${p.name}</div>
+                <div class="price">From ${window.ROUX.formatPrice(p.priceFrom)}</div>
+              </div>
+              <div class="meta">
+                <span>${(p.colors || []).length} Colorway${p.colors.length>1?'s':''}</span>
+                <span>·</span>
+                <span>${(p.sets || []).length} Set Size${p.sets.length>1?'s':''}</span>
+              </div>
+              <div class="flex gap-2 mt-2">${swatches}</div>
+            </a>
+        `;
+    }).join("");
+})();
+</script>
+</body>
+</html>

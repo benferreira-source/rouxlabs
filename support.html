@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Support — Roux Labs</title>
+<link rel="icon" type="image/png" href="assets/img/logo-roux.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/polish-secondary.css">
+</head>
+<body class="page-support">
+<header class="site-header" data-roux-header></header>
+
+<section class="page-pad">
+  <div class="container">
+    <div class="eyebrow">Support</div>
+    <h1>HELP, FAST.</h1>
+    <p class="sub">We answer within one business day.</p>
+
+    <div class="two-col">
+      <div>
+        <h2 class="h-md" style="margin-bottom:var(--s-3)">Frequently Asked</h2>
+
+        <details class="faq-item" open>
+          <summary>How does FlexPort mount to a rack?<span class="mono">+</span></summary>
+          <p>FlexPort snaps onto the vertical rail of any standard 19″ rack. No screws, no zip ties, no tools. Snap on, snap off.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What's the difference between Left and Right?<span class="mono">+</span></summary>
+          <p>Each FlexPort routes cables out one side of the rack. Left versions route to the left of the rack, Right versions to the right. Choose your side based on which way your patch cables run. For symmetrical installs, order one Left set and one Right set.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What cable types does it support?<span class="mono">+</span></summary>
+          <p>FlexPort fits standard Cat5e, Cat6, and Cat6A patch cables. The cable saddles maintain bend radius spec for Cat6A.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Why is it sold in sets?<span class="mono">+</span></summary>
+          <p>A full rack looks right when every unit matches. Sets of 2, 4, 8, and 12 let you size a single deployment cleanly. Need a custom set size? Email <a href="mailto:hello@rouxlabs.com">hello@rouxlabs.com</a>.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Where do you ship?<span class="mono">+</span></summary>
+          <p>Currently shipping inside the continental US. International orders coming soon — email us for ETA.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Return policy?<span class="mono">+</span></summary>
+          <p>30 days, unused, original packaging. Free return shipping on defects.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is the patent issued?<span class="mono">+</span></summary>
+          <p>Patent application filed in May 2026.</p>
+        </details>
+      </div>
+
+      <aside id="contact">
+        <div class="callout">
+          <h2 class="h-md">DIRECT LINE.</h2>
+          <p>For pre-sales, install help, or wholesale inquiries:</p>
+          <p class="mono" style="margin:var(--s-4) 0;font-size:13px;letter-spacing:.08em">
+            <strong>hello@rouxlabs.com</strong><br>
+            <strong>support@rouxlabs.com</strong>
+          </p>
+          <form data-support-form>
+            <label class="field">
+              <span class="lbl">Your Email</span>
+              <input type="email" name="email" required placeholder="you@company.com">
+            </label>
+            <label class="field">
+              <span class="lbl">Subject</span>
+              <select name="topic" required>
+                <option value="">Select a topic</option>
+                <option>Pre-sales / Sizing</option>
+                <option>Install Help</option>
+                <option>Order Status</option>
+                <option>Wholesale / Bulk</option>
+                <option>Press / R&amp;D</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="lbl">Message</span>
+              <textarea name="message" rows="5" required placeholder="Tell us what you need."></textarea>
+            </label>
+            <button class="btn btn-block">Send →</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer" data-roux-footer></footer>
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script>
+document.querySelector("[data-support-form]").addEventListener("submit", function(e){
+    e.preventDefault();
+    const f = e.target;
+    const body = encodeURIComponent(
+        "From: " + f.email.value + "\n" +
+        "Topic: " + f.topic.value + "\n\n" +
+        f.message.value
+    );
+    const subject = encodeURIComponent("[Roux Labs Support] " + f.topic.value);
+    location.href = "mailto:support@rouxlabs.com?subject=" + subject + "&body=" + body;
+});
+</script>
+</body>
+</html>

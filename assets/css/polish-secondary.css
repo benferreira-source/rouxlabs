@@ -1,0 +1,511 @@
+/* ============================================================
+   ROUX LABS — Polish for secondary pages
+   --------------------------------------------------------------
+   Scope: about.html, support.html, checkout.html, success.html
+   Each rule is gated by a body.page-* class so this file cannot
+   bleed into index/shop/flexport/product.
+
+   Goal: bring these four pages into the Supreme-style restraint
+   established by the home page — pure b/w, hairline borders,
+   generous whitespace, mono microcopy, single orange accent
+   reserved for primary CTAs only.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Shared page-header treatment (eyebrow + tight headline + sub)
+   Applied to all four polished pages.
+   ------------------------------------------------------------ */
+body.page-about,
+body.page-support,
+body.page-checkout,
+body.page-success {
+    background: var(--paper);
+    color: var(--ink);
+}
+
+body.page-about .page-pad,
+body.page-support .page-pad,
+body.page-checkout .page-pad,
+body.page-success .page-pad {
+    padding: clamp(48px, 7vw, 96px) 0 var(--s-9);
+}
+
+body.page-support .page-pad > .container > .eyebrow,
+body.page-checkout .page-pad > .container > .eyebrow,
+body.page-success .page-pad > .container > .eyebrow {
+    color: var(--grey-700);
+    margin-bottom: var(--s-3);
+}
+
+body.page-support .page-pad > .container > h1,
+body.page-checkout .page-pad > .container > h1 {
+    font-size: clamp(20px, 2.4vw, 28px);
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+    margin-bottom: var(--s-4);
+}
+
+body.page-support .page-pad > .container > .sub,
+body.page-checkout .page-pad > .container > .sub {
+    color: var(--grey-700);
+    margin-bottom: var(--s-8);
+}
+
+/* ============================================================
+   ABOUT — Grey Space
+   --------------------------------------------------------------
+   Goal: single-column brand statement, generous side margins,
+   restrained palette. Keep the existing #patent timeline but
+   tighten visuals. Remove orange "PATENT PENDING" treatment
+   from the stamp.
+   ============================================================ */
+body.page-about .grey-space {
+    background: var(--paper);
+    color: var(--ink);
+    border-top: 0;
+    border-bottom: 1px solid var(--ink);
+    padding: clamp(72px, 11vw, 160px) 0 clamp(56px, 9vw, 128px);
+}
+
+/* Force single-column on the manifesto section */
+body.page-about .grey-space .container {
+    display: block;
+    max-width: 880px;
+    padding-left: clamp(20px, 6vw, 80px);
+    padding-right: clamp(20px, 6vw, 80px);
+}
+
+body.page-about .grey-space .eyebrow {
+    color: var(--grey-700) !important;
+    margin-bottom: var(--s-5);
+}
+
+/* Manifesto headline — Supreme-restrained, no display-font moment */
+body.page-about .grey-space .h-display {
+    color: var(--ink) !important;
+    font-size: clamp(28px, 4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0 0 clamp(28px, 4vw, 48px);
+}
+body.page-about .grey-space .h-display .accent {
+    color: var(--rl-orange);
+}
+
+body.page-about .grey-space p {
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: clamp(13px, 1.2vw, 15px);
+    line-height: 1.55;
+    max-width: 60ch;
+    margin-bottom: var(--s-4);
+}
+body.page-about .grey-space p:last-child {
+    margin-bottom: 0;
+}
+
+/* Patent / R&D block — keep, but tighten the orange stamp */
+body.page-about .rd-block {
+    padding: clamp(72px, 9vw, 128px) 0;
+    background: var(--paper);
+}
+body.page-about .rd-block .container {
+    max-width: 1080px;
+    grid-template-columns: 240px 1fr;
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
+}
+@media (max-width: 800px){
+    body.page-about .rd-block .container { grid-template-columns: 1fr; }
+}
+
+/* Monochrome stamp — no orange */
+body.page-about .rd-block .stamp {
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    aspect-ratio: 1 / 1;
+    max-width: 200px;
+}
+body.page-about .rd-block .stamp .big {
+    color: var(--ink);
+}
+
+body.page-about .rd-block .eyebrow {
+    color: var(--grey-700);
+}
+body.page-about .rd-block h2.h-lg {
+    font-size: clamp(18px, 2vw, 26px);
+    letter-spacing: -0.005em;
+    margin-bottom: var(--s-5);
+}
+
+body.page-about .rd-block .specs {
+    border-top: 1px solid var(--ink);
+}
+body.page-about .rd-block .specs dt {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--grey-700);
+}
+body.page-about .rd-block .specs dd {
+    font-size: 13px;
+    text-align: left;
+    letter-spacing: -0.005em;
+}
+
+/* The install/CTA block at bottom — leave grid as-is but soften
+   the copy block and make sure the orange CTA is the single accent */
+body.page-about .install .eyebrow { color: var(--grey-700); }
+body.page-about .install h2.h-lg {
+    font-size: clamp(20px, 2.4vw, 28px);
+    letter-spacing: -0.005em;
+}
+
+/* ============================================================
+   SUPPORT
+   --------------------------------------------------------------
+   FAQ as quiet monochrome accordion, hairline dividers, flat
+   form on white. Remove any dev-note residue.
+   ============================================================ */
+body.page-support .two-col {
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
+}
+@media (max-width: 900px){
+    body.page-support .two-col { grid-template-columns: 1fr; }
+}
+
+body.page-support .two-col > div > h2.h-md {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin-bottom: var(--s-5) !important;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+/* FAQ list — top hairline so the first item gets a divider too */
+body.page-support .two-col > div {
+    border-top: 1px solid var(--ink);
+}
+
+body.page-support .faq-item {
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--line);
+}
+body.page-support .faq-item summary {
+    font-family: var(--f-body);
+    font-weight: 600;
+    text-transform: none;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+    color: var(--ink);
+    padding-right: var(--s-3);
+    gap: var(--s-4);
+}
+body.page-support .faq-item summary .mono {
+    font-family: var(--f-mono);
+    font-size: 16px;
+    line-height: 1;
+    color: var(--grey-700);
+    transition: transform 120ms ease;
+    flex-shrink: 0;
+}
+body.page-support .faq-item[open] summary .mono {
+    transform: rotate(45deg);
+    color: var(--ink);
+}
+body.page-support .faq-item[open] summary {
+    color: var(--ink);
+}
+body.page-support .faq-item p {
+    margin-top: var(--s-4);
+    color: var(--grey-700);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 62ch;
+}
+body.page-support .faq-item p a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+}
+
+/* Contact aside — flat, hairline, no callout box. */
+body.page-support aside .callout {
+    background: var(--paper);
+    border: 0;
+    padding: 0;
+}
+body.page-support aside .callout h2.h-md {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    font-weight: 400;
+    margin-bottom: var(--s-4) !important;
+    line-height: 1.2;
+}
+body.page-support aside .callout > p {
+    color: var(--grey-700);
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: var(--s-4);
+}
+body.page-support aside .callout .mono a,
+body.page-support aside .callout .mono strong {
+    font-weight: 500;
+    color: var(--ink);
+}
+body.page-support aside .callout > p.mono {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: var(--s-4) 0 !important;
+    margin: var(--s-5) 0 var(--s-6) !important;
+    font-size: 12px;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
+}
+
+/* Form fields — flat, hairline, on white */
+body.page-support .field {
+    margin-bottom: var(--s-4);
+}
+body.page-support .field .lbl {
+    color: var(--grey-700);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+}
+body.page-support input[type="email"],
+body.page-support input[type="text"],
+body.page-support select,
+body.page-support textarea {
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    padding: 12px 14px;
+    font-size: 13px;
+}
+body.page-support input::placeholder,
+body.page-support textarea::placeholder {
+    color: var(--grey-500);
+}
+body.page-support button.btn.btn-block {
+    margin-top: var(--s-3);
+}
+
+/* Hide any leftover dev notes inside support */
+body.page-support [data-dev-note] { display: none !important; }
+
+/* ============================================================
+   CHECKOUT
+   --------------------------------------------------------------
+   Cart rows monochrome + sharp, totals hairline mono, orange
+   button is the single CTA. Kill the Test-Mode callout entirely.
+   ============================================================ */
+body.page-checkout .two-col {
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+}
+@media (max-width: 900px){
+    body.page-checkout .two-col { grid-template-columns: 1fr; }
+}
+
+/* Cart row list — wrap with hairline above and below the set */
+body.page-checkout [data-checkout-items] {
+    border-top: 1px solid var(--ink);
+}
+body.page-checkout [data-checkout-items] .cart-row {
+    grid-template-columns: 96px 1fr auto !important;
+    gap: var(--s-5);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--line);
+    align-items: flex-start;
+}
+body.page-checkout [data-checkout-items] .cart-row .thumb {
+    width: 96px !important;
+    height: 96px !important;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body.page-checkout [data-checkout-items] .cart-row .thumb svg,
+body.page-checkout [data-checkout-items] .cart-row .thumb img {
+    max-width: 78%;
+    max-height: 78%;
+    object-fit: contain;
+}
+body.page-checkout [data-checkout-items] .cart-row .meta .name {
+    font-family: var(--f-body);
+    font-weight: 600;
+    font-size: 15px !important;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+    margin-bottom: 4px;
+    text-transform: none;
+}
+body.page-checkout [data-checkout-items] .cart-row .meta .sub {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin-bottom: 4px;
+}
+body.page-checkout [data-checkout-items] .cart-row .price {
+    font-family: var(--f-mono);
+    font-size: 13px;
+    color: var(--ink);
+}
+
+/* Empty-state callout inside the items column — quiet */
+body.page-checkout [data-checkout-items] .callout {
+    border: 1px solid var(--line);
+    padding: var(--s-7);
+    background: var(--paper);
+    text-align: center;
+}
+
+/* Order summary aside — flat panel, hairline borders, no card chrome */
+body.page-checkout aside .callout {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: var(--s-6);
+}
+body.page-checkout aside .callout h2.h-md {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    font-weight: 400;
+    margin-bottom: var(--s-5) !important;
+    line-height: 1.2;
+}
+
+body.page-checkout .totals {
+    border-top: 1px solid var(--line);
+    padding-top: var(--s-4);
+    margin-top: 0;
+}
+body.page-checkout .totals .line {
+    padding: 6px 0;
+    color: var(--grey-700);
+}
+body.page-checkout .totals .line span:last-child {
+    color: var(--ink);
+}
+body.page-checkout .totals .line.grand {
+    font-family: var(--f-mono);
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--ink);
+    padding-top: var(--s-4);
+    margin-top: var(--s-4);
+    color: var(--ink);
+}
+body.page-checkout .totals .line.grand span:first-child {
+    color: var(--ink);
+}
+
+body.page-checkout aside .callout .mono.center {
+    color: var(--grey-500) !important;
+    margin-top: var(--s-4) !important;
+    line-height: 1.6;
+}
+
+/* Kill any leftover test-mode / dev-note callouts in checkout */
+body.page-checkout [data-dev-note],
+body.page-checkout aside .callout.mt-4 {
+    display: none !important;
+}
+
+/* ============================================================
+   SUCCESS — Order Confirmed
+   --------------------------------------------------------------
+   Calm centered confirmation. No card chrome on the callout,
+   single-column, lots of whitespace.
+   ============================================================ */
+body.page-success .page-pad {
+    padding: clamp(80px, 12vw, 160px) 0 clamp(80px, 12vw, 160px);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+body.page-success .page-pad > .container {
+    width: 100%;
+}
+
+body.page-success .callout {
+    border: 0;
+    padding: 0;
+    max-width: 560px !important;
+    text-align: center;
+}
+body.page-success .callout .eyebrow {
+    color: var(--grey-700);
+    display: block;
+    margin-bottom: var(--s-5);
+}
+body.page-success .callout h1 {
+    font-size: clamp(22px, 2.6vw, 32px) !important;
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+    margin: 0 0 var(--s-5) !important;
+}
+body.page-success .callout p.lead {
+    color: var(--grey-700) !important;
+    font-size: 14px;
+    line-height: 1.55;
+    max-width: 48ch;
+    margin: 0 auto var(--s-7);
+}
+
+/* Order summary specs — hairline rows, mono labels, no card */
+body.page-success .callout .specs {
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 0;
+    margin: 0 auto var(--s-7);
+    max-width: 480px;
+    text-align: left;
+}
+body.page-success .callout .specs dt,
+body.page-success .callout .specs dd {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+}
+body.page-success .callout .specs dt {
+    color: var(--grey-700);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 10px;
+}
+body.page-success .callout .specs dd {
+    text-align: right;
+    color: var(--ink);
+}
+body.page-success .callout .specs > :nth-last-child(-n+2) {
+    border-bottom: 0;
+}
+body.page-success .callout .specs dd a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+}
+
+body.page-success .callout .flex {
+    justify-content: center;
+}

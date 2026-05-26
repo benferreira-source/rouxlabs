@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roux Labs — FlexPort. Zero-U cable management.</title>
+<link rel="icon" type="image/png" href="assets/img/logo-roux.png">
+<meta name="description" content="Roux Labs is an R&amp;D company that also sells products. FlexPort is our patented zero-U cable management system for Cat6A patch panels. Made in the USA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body class="page-home">
+
+<header class="site-header" data-roux-header></header>
+
+<!-- ============================================================
+     PRODUCT GRID — the homepage IS the products.
+     Built explicitly (not from the catalog) so each FlexPort
+     colorway gets its own tile.
+     ============================================================ -->
+<main class="home-grid" data-home-grid aria-label="Products"></main>
+
+<footer class="site-footer" data-roux-footer></footer>
+
+<!-- ============================================================
+     Scripts
+     ============================================================ -->
+<script src="assets/js/products.js"></script>
+<script src="assets/js/cart.js"></script>
+<script>
+/* Render the Supreme-style homepage tile grid.
+   One tile per FlexPort colorway (4) + one per accessory (2). */
+(function(){
+    const grid = document.querySelector("[data-home-grid]");
+    if (!grid) return;
+
+    const flexport = window.ROUX.findProduct("flexport-zero-u");
+    const strap    = window.ROUX.findProduct("roux-strap");
+    const labels   = window.ROUX.findProduct("label-pack");
+    if (!flexport || !strap || !labels) return;
+
+    const tiles = [];
+
+    /* Build a tile's image markup. Default = set-of-2 photo so each
+       tile reads as cleanly as Supreme's single-product thumbnails;
+       hover reveals the set-of-12 photo, silently telling the visitor
+       "sold in sets" without a word of copy. */
+    function flexportImageStack(colorKey, label){
+        var base = window.ROUX.productSvg(flexport.id, colorKey, 2);
+        var hover = window.ROUX.productSvg(flexport.id, colorKey, 12)
+            .replace(/<img /, '<img class="home-tile-hover" ');
+        // Tag the base so CSS can target it specifically.
+        base = base.replace(/<img /, '<img class="home-tile-base" ');
+        return '<div class="home-tile-stack">' + base + hover + '</div>';
+    }
+
+    /* One tile per FlexPort colorway */
+    (flexport.colors || []).forEach(function(c){
+        tiles.push({
+            href:    "flexport.html?color=" + c.key,
+            image:   flexportImageStack(c.key, c.label),
+            name:    "FlexPort " + c.label,
+            price:   flexport.priceFrom,
+            colors:  flexport.colors,
+            activeKey: c.key
+        });
+    });
+
+    /* Accessories — one tile each (no hover swap, single image) */
+    [strap, labels].forEach(function(p){
+        tiles.push({
+            href:    "product.html?id=" + p.id,
+            image:   window.ROUX.productSvg(p.id, (p.colors[0]||{}).key),
+            name:    p.name,
+            price:   p.priceFrom,
+            colors:  p.colors,
+            activeKey: (p.colors[0]||{}).key
+        });
+    });
+
+    grid.innerHTML = tiles.map(function(t){
+        const swatches = (t.colors || []).map(function(c){
+            const active = c.key === t.activeKey ? " is-active" : "";
+            return '<span class="swatch ' + c.swatchClass + active + '" title="' + c.label + '"></span>';
+        }).join("");
+        return ''
+          + '<a class="home-tile" href="' + t.href + '">'
+          +   '<div class="home-tile-image">' + t.image + '</div>'
+          +   '<div class="home-tile-meta">'
+          +     '<span class="home-tile-name">' + t.name + '</span>'
+          +     '<span class="home-tile-price">' + window.ROUX.formatPrice(t.price) + '</span>'
+          +     '<span class="home-tile-swatches">' + swatches + '</span>'
+          +   '</div>'
+          + '</a>';
+    }).join("");
+})();
+</script>
+</body>
+</html>
