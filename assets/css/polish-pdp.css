@@ -292,3 +292,14 @@ body.page-pdp .install-img{ border-left: 1px solid var(--line); }
     body.page-pdp .orientation-toggle .opt{ padding: var(--s-3) var(--s-2); }
 }
 
+
+/* ============================================================
+   Orientation flip — the right-orient FlexPort is, per the
+   patent, the same design mirrored at print stage. Reflect
+   that visually by flipping the gallery photos when the user
+   selects RIGHT.
+   ============================================================ */
+body.page-pdp [data-pdp-hero][data-orient="R"] img,
+body.page-pdp [data-pdp-thumbs][data-orient="R"] img{
+    transform: scaleX(-1);
+}

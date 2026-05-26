@@ -154,7 +154,11 @@
                  + '</button>';
         }).join("");
 
-        // Hero + thumbs
+        // Hero + thumbs. Orientation === "R" mirrors the photo
+        // horizontally — per the patent, the right-orient version
+        // is the left design flipped at print stage.
+        el.hero.setAttribute("data-orient", state.orientation);
+        el.thumbs.setAttribute("data-orient", state.orientation);
         el.hero.innerHTML = window.ROUX.productSvg(PRODUCT.id, state.color, state.set);
         el.thumbs.innerHTML = PRODUCT.colors.map(function(c){
             return '<div class="thumb' + (state.color === c.key ? ' active' : '') + '" data-set-color="' + c.key + '">'
