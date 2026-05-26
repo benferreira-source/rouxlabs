@@ -33,7 +33,7 @@
             id: "colors",
             chip: "Color options",
             ask: "What colors are available?",
-            reply: "Four colorways: Black, White, Orange, Red. We follow installer color conventions — Red = public safety, Orange = cameras, White = data, Black = general use. Pick the one that matches your run or mix-and-match for a coded rack."
+            reply: "Four colorways: Black, White, Orange, Red. Pick the one that matches your run, or mix-and-match for a coded rack."
         },
         {
             id: "order",
@@ -75,7 +75,7 @@
       +     '</div>'
       +     '<div class="chat-msg chat-msg-bot">'
       +       '<div class="chat-bubble">'
-      +         'Your real-time install desk — trained on the FlexPort patent, every spec, and every install Datastrait has shipped. I read every Cat6A bend-radius chart so you don’t have to. Ask me anything — install, sizing, color-coding, shipping, returns, or an order.'
+      +         'Your real-time install desk — trained on the FlexPort patent, every spec, and every install Datastrait has shipped. I read every Cat6A bend-radius chart so you don’t have to. Ask me anything — install, sizing, colors, shipping, returns, or an order.'
       +       '</div>'
       +       '<div class="chat-meta">roux · now</div>'
       +     '</div>'
