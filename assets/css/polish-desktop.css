@@ -1,0 +1,233 @@
+/* ============================================================
+   ROUX LABS — Desktop / High-Res Polish Layer
+   --------------------------------------------------------------
+   Loaded via cart.js on every page, after pages.css and the
+   page-scoped polish files. Owned by the "Mac / high-res"
+   agent — calibrates the experience on 1440px+ viewports and
+   retina displays. Mobile rules live in polish-mobile.css.
+
+   All rules are scoped to (min-width: 1200px) or larger so they
+   never compete with polish-mobile.css.
+   ============================================================ */
+
+/* NOTE: A Safari-translucent-toolbar hairline rule was considered
+   here but skipped — the visible logo at the top of the home splash
+   already disambiguates the page from chrome, and non-home pages
+   carry a 1px ink border-bottom on .site-header. */
+
+/* ============================================================
+   1. TYPE & READABILITY — gentle bump on big retina displays
+   --------------------------------------------------------------
+   13px body at 220ppi can feel cramped. Bump to 14px once we
+   cross 1600px and again to 15px above 2200px. Headings already
+   use clamp() so they scale on their own; we only nudge body
+   and the small mono/eyebrow microcopy proportionally.
+   ============================================================ */
+@media (min-width: 1600px){
+    body{ font-size: 14px; }
+    p.lead{ font-size: 15px; }
+}
+@media (min-width: 2200px){
+    body{ font-size: 15px; line-height: 1.5; }
+    p.lead{ font-size: 16px; }
+}
+
+/* ============================================================
+   2. HOME — intro logo and nav, scaled for big screens
+   --------------------------------------------------------------
+   At 2200px+ the 280px-tall logo starts to look like a postage
+   stamp on a 27" iMac. Raise the ceiling without changing the
+   clamp's fluid character below 2200px. Nav letter-spacing
+   tightens just a touch at huge widths so the row doesn't feel
+   strung-out.
+   ============================================================ */
+@media (min-width: 2200px){
+    .brand-logo.brand-logo-intro{
+        height: clamp(280px, 18vw, 380px);
+        max-width: 60vw;
+    }
+    .nav-intro{
+        font-size: 14px;
+        letter-spacing: 0.18em;
+        gap: clamp(36px, 3vw, 56px);
+    }
+    .header-intro{
+        padding-top: clamp(96px, 8vw, 160px);
+        padding-bottom: clamp(56px, 5vw, 96px);
+        gap: clamp(40px, 3.5vw, 72px);
+    }
+}
+
+/* ============================================================
+   3. HOME GRID — denser packing on ultra-wide displays
+   --------------------------------------------------------------
+   The home grid is edge-to-edge and already 5-col at >=1400px.
+   On 1800px+ external monitors the 5-col tiles can feel a bit
+   stretched; at 2400px+ a 6-col grid keeps each tile a tasteful
+   square instead of letterboxing horizontally. Hairline 1px
+   gutter is preserved by inheritance.
+   ============================================================ */
+@media (min-width: 1800px){
+    .page-home .home-grid{ grid-template-columns: repeat(6, 1fr); }
+}
+/* NOTE: We deliberately cap at 6 cols. The catalog currently has
+   6 tiles (4 FlexPort colorways + 2 accessories); a 7-col grid
+   leaves an empty tile slot which reads as a layout bug. When
+   the catalog grows past 12 tiles, revisit and add a 7-col rule
+   at >=2400px. */
+
+/* Slow the tile hover transitions a touch on hover-capable
+   pointers — feels buttery on Macs. */
+@media (min-width: 1200px) and (hover: hover){
+    .page-home .home-tile{ transition: background 180ms ease; }
+    .page-home .home-tile-image .home-tile-stack > img{ transition: opacity 360ms ease; }
+}
+
+/* ============================================================
+   4. CONTAINER — proportionate width on Studio Display / 5K
+   --------------------------------------------------------------
+   Container max-width is 1440px. On 2560px+ that's only 56% of
+   the viewport, which makes content feel marooned. Raise it
+   gently in steps. We DON'T touch:
+     - .page-home .home-grid (edge-to-edge by design)
+     - body.page-about .grey-space .container (intentional 880px
+       reading column — overridden in polish-secondary.css)
+     - body.page-about .rd-block .container (intentional 1080px)
+   The selector targets the bare .container utility used by
+   shop / flexport / support / checkout layouts.
+   ============================================================ */
+@media (min-width: 1800px){
+    .container{ max-width: 1600px; }
+}
+@media (min-width: 2200px){
+    .container{ max-width: 1760px; }
+}
+@media (min-width: 2800px){
+    .container{ max-width: 1920px; }
+}
+
+/* The site-header bar is constrained by gutter, not container.
+   Make sure header padding scales so the brand / cart don't hug
+   the corners on enormous displays. */
+@media (min-width: 2200px){
+    .header-bar{
+        padding-left: clamp(48px, 4vw, 96px);
+        padding-right: clamp(48px, 4vw, 96px);
+    }
+}
+
+/* ============================================================
+   5. SHOP — cap grid width on huge displays
+   --------------------------------------------------------------
+   shop.html uses no .container wrapper; .shop-head, .shop-filter-row
+   and .product-grid sit directly on the page with --gutter padding.
+   On 2560px+ that means a 3-product catalog stretches across 2200px+
+   with each card ~700px wide — beyond product-photo readability.
+   Center the bands with a max-width matching our global container
+   scale.
+   ============================================================ */
+@media (min-width: 1800px){
+    .page-shop .shop-head{ padding-top: var(--s-7); }
+    .page-shop .shop-head,
+    .page-shop .shop-filter-row,
+    .page-shop .product-grid{
+        max-width: 1600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media (min-width: 2200px){
+    .page-shop .shop-head,
+    .page-shop .shop-filter-row,
+    .page-shop .product-grid{
+        max-width: 1760px;
+    }
+}
+@media (min-width: 2800px){
+    .page-shop .shop-head,
+    .page-shop .shop-filter-row,
+    .page-shop .product-grid{
+        max-width: 1920px;
+    }
+}
+
+/* ============================================================
+   6. FOOTER — wider gap on huge displays
+   --------------------------------------------------------------
+   The mailing-list / utility-link row uses 6px gap. On 2560px
+   that reads as crowded against the surrounding whitespace.
+   Bump to a more deliberate gap while keeping the centered
+   single-row Supreme posture.
+   ============================================================ */
+@media (min-width: 1600px){
+    .site-footer{ padding: 72px var(--gutter); }
+    .footer-links{ gap: 14px; font-size: 12px; }
+}
+@media (min-width: 2200px){
+    .site-footer{ padding: 96px var(--gutter); }
+    .footer-links{ gap: 20px; font-size: 13px; letter-spacing: 0.16em; }
+    .footer-mark{ font-size: 11px; margin-top: var(--s-4); }
+}
+
+/* ============================================================
+   7. HOVER AFFORDANCES — buttery transitions on Mac
+   --------------------------------------------------------------
+   The base buttons use 120ms transitions. On retina at slower
+   scan-rates that can feel snappy in a cheap way. Slow to 160ms
+   and add color to the property list so we don't surprise
+   ourselves later. Hover-only via (hover: hover).
+   ============================================================ */
+@media (min-width: 1200px) and (hover: hover){
+    .btn,
+    .btn-ghost,
+    .btn-orange{
+        transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+    .cart-btn{ transition: opacity 160ms ease, color 160ms ease; }
+    .cart-btn:hover{ opacity: 0.7; }
+
+    .nav a,
+    .nav-intro a{
+        transition: border-bottom-color 160ms ease, color 160ms ease;
+    }
+
+    .footer-links a{ transition: color 160ms ease; }
+
+    .page-shop .shop-filter{
+        transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+}
+
+/* ============================================================
+   8. IMAGE RENDERING — slightly crisper interpolation
+   --------------------------------------------------------------
+   Product photos are ~1500px wide JPEGs. On 5K Retina they
+   sometimes need to upscale a hair. -webkit-optimize-contrast
+   keeps the edges sharp without going pixelated.
+   Restricted to product photography so we don't accidentally
+   ruin SVG logos or icon renders.
+   ============================================================ */
+@media (min-width: 1600px){
+    .page-home .home-tile-image > img,
+    .product-card .image > img,
+    .product-card .image > picture > img{
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
+
+/* ============================================================
+   9. FOCUS RING — visible on big displays, brand-correct
+   --------------------------------------------------------------
+   The base focus-visible outlines are 1px and disappear on
+   crowded retina backgrounds. Keep them thin but high-contrast
+   on desktop sizes.
+   ============================================================ */
+@media (min-width: 1200px){
+    .nav a:focus-visible,
+    .nav-intro a:focus-visible,
+    .footer-links a:focus-visible,
+    .cart-btn:focus-visible{
+        outline: 2px solid var(--ink);
+        outline-offset: 3px;
+    }
+}

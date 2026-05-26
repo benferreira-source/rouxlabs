@@ -278,7 +278,22 @@
         document.body.appendChild(s);
     }
 
+    function loadResponsivePolish(){
+        // Inject the two viewport-specific polish stylesheets on every
+        // page. They live after pages.css + the page-scoped polish files
+        // so their rules cascade cleanly.
+        ["polish-desktop", "polish-mobile"].forEach(function(name){
+            if (document.querySelector('link[data-roux-' + name + ']')) return;
+            var l = document.createElement("link");
+            l.rel = "stylesheet";
+            l.href = "assets/css/" + name + ".css";
+            l.setAttribute("data-roux-" + name, "");
+            document.head.appendChild(l);
+        });
+    }
+
     document.addEventListener("DOMContentLoaded", function(){
+        loadResponsivePolish();
         buildHeader();
         buildFooter();
         buildDrawer();

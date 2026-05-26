@@ -39,7 +39,7 @@
             id: "order",
             chip: "Track an order",
             ask: "Where's my order?",
-            reply: "Drop your order number (starts with RL-) and I'll pull it up. If you don't have it handy, the confirmation email has it in the subject. You can also sign in at rouxlabs.com/orders."
+            reply: "Drop your order number (starts with RL-) and I'll pull it up. If you don't have it handy, the confirmation email has it in the subject — or email support@rouxlabs.com and a human will follow up within one business day."
         }
     ];
 
