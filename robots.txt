@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /checkout.html
+Disallow: /success.html
+Disallow: /404.html
+
+Sitemap: https://rouxlabs.benops.dev/sitemap.xml

@@ -116,7 +116,7 @@
               <a href="flexport.html">sizing</a><span class="sep">·</span>
               <a href="support.html#contact">contact</a><span class="sep">·</span>
               <a href="about.html#patent">patent</a><span class="sep">·</span>
-              <a href="mailto:hello@rouxlabs.com">mailing list</a><span class="sep">·</span>
+              <a href="#mailing-list" data-newsletter-open>mailing list</a><span class="sep">·</span>
               <a href="shop.html">shop</a><span class="sep">·</span>
               <a href="about.html#terms">terms</a><span class="sep">·</span>
               <a href="about.html#privacy">privacy</a><span class="sep">·</span>
@@ -269,6 +269,15 @@
         document.body.appendChild(s);
     }
 
+    function loadNewsletter(){
+        if (document.querySelector('script[data-roux-newsletter]')) return;
+        var s = document.createElement("script");
+        s.src = "assets/js/newsletter.js";
+        s.defer = true;
+        s.setAttribute("data-roux-newsletter", "");
+        document.body.appendChild(s);
+    }
+
     document.addEventListener("DOMContentLoaded", function(){
         buildHeader();
         buildFooter();
@@ -276,6 +285,7 @@
         ROUX.renderCart();
         updateCartCount();
         loadSupportChat();
+        loadNewsletter();
     });
 
     /* ---------- Product image / silhouette ------------------ */
