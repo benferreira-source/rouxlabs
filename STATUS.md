@@ -23,15 +23,24 @@
 ## What's NOT done (launch blockers)
 
 1. **Stripe live keys** — `checkout.js` still has `pk_test_REPLACE_ME`. Either paste a live key + deploy `/api/checkout.js` with `STRIPE_SECRET_KEY`, or fill `STRIPE_LINKS` with Stripe Payment Link URLs per SKU.
-2. **Domain** — Currently lives at `rouxlabs.benops.dev`. When the real `rouxlabs.com` is acquired, point DNS at the same Cloudflare tunnel and add the ingress rule.
+2. **Domain** — Currently lives at `rouxlabs.benops.dev` (a Vercel custom-domain alias on the `roux-labs` project). When the real `rouxlabs.com` is acquired, add it as a custom domain in the Vercel project settings and update DNS to point at Vercel.
 3. **Email** — `hello@rouxlabs.com` / `support@rouxlabs.com` referenced site-wide but no forwarders exist yet.
 
 ## Operational handles
 
-- Local dev: `python3 serve.py` (port 4321) — `.claude/launch.json` already wires this to the preview tool.
-- Production server: launchd plist `com.benops.rouxlabs` at `~/Library/LaunchAgents/`. Logs at `~/Desktop/shared/logs/rouxlabs.{log,error.log}`.
-- Restart: `launchctl unload ~/Library/LaunchAgents/com.benops.rouxlabs.plist && launchctl load ~/Library/LaunchAgents/com.benops.rouxlabs.plist`
-- Repo follows main; pushes deploy nothing automatically (the site is served straight off disk by `serve.py`). To make a change live: edit + save → Cloudflare cache may take a moment to refresh.
+**Production hosting — Vercel.**
+- Project: `roux-labs` (ID `prj_gz5tSMRIXGjzUQcL8U3Hl6dM5lfP`) under team `benferreira-sources-projects`.
+- Public URL: `https://rouxlabs.benops.dev` — Vercel custom domain (alias). The Vercel project owns the DNS terminus, not the Cloudflare tunnel.
+- Git source: `github.com/benferreira-source/rouxlabs`, branch `main`. Auto-deploys on every push.
+- Dashboard: https://vercel.com/benferreira-sources-projects/roux-labs
+- Manual deploy from local: `vercel --prod` (the local checkout is linked via `.vercel/`).
+
+**Local dev (not part of the production path).**
+- `python3 serve.py` (port 4321) — `.claude/launch.json` wires this to the preview tool for fast iteration before pushing.
+- A launchd plist `com.benops.rouxlabs` at `~/Library/LaunchAgents/` keeps `serve.py` alive at boot. This is a leftover from the pre-Vercel era and is NOT what serves `rouxlabs.benops.dev`. Logs at `~/Desktop/shared/logs/rouxlabs.{log,error.log}`. Safe to keep around for local previewing; safe to disable if you don't want it running.
+- Restart serve.py if needed: `launchctl unload ~/Library/LaunchAgents/com.benops.rouxlabs.plist && launchctl load ~/Library/LaunchAgents/com.benops.rouxlabs.plist`.
+
+**To ship a change:** edit → commit → `git push origin main` → Vercel auto-deploys (typically <30s build).
 
 ## Useful pointers
 
@@ -48,4 +57,4 @@
 - News / lookbook page (Supreme has these).
 - Real wholesale page when ready for MSP outreach.
 
-— Last touched 2026-05-26.
+— Last touched 2026-05-27.
