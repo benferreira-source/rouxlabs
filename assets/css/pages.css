@@ -1503,3 +1503,61 @@ body.page-home .home-strip-links .sep{ color: var(--grey-500); }
     body.page-home .home-strip{ grid-template-columns: repeat(8, minmax(80px, 1fr)); }
     body.page-home .home-strip-links{ flex-direction: column; gap: 8px; }
 }
+
+/* ============================================================
+   STORY PORTRAIT — Johnny credit byline block
+   ============================================================ */
+.page-story .story-portrait{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-3);
+    margin: clamp(40px, 6vw, 80px) 0 0;
+    max-width: 320px;
+}
+.page-story .story-portrait img{
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center 20%;
+    background: var(--grey-100);
+    border: 1px solid var(--ink);
+    filter: grayscale(0.15);
+    transition: filter 240ms ease;
+}
+.page-story .story-portrait img:hover{ filter: grayscale(0); }
+.page-story .story-portrait-cap{
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    line-height: 1.6;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+.page-story .story-portrait-cap .name{ color: var(--ink); font-weight: 600; }
+.page-story .story-portrait-cap .sep{ color: var(--grey-500); }
+@media (min-width: 720px){
+    .page-story .story-portrait{
+        flex-direction: row;
+        align-items: center;
+        gap: var(--s-5);
+        max-width: 100%;
+    }
+    .page-story .story-portrait img{
+        width: 220px;
+        flex-shrink: 0;
+    }
+    .page-story .story-portrait-cap{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        line-height: 1.5;
+    }
+    .page-story .story-portrait-cap .sep{ display: none; }
+}
