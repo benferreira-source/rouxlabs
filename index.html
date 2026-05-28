@@ -23,21 +23,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=6">
-<link rel="stylesheet" href="assets/css/pages.css?v=6">
+<link rel="stylesheet" href="assets/css/base.css?v=7">
+<link rel="stylesheet" href="assets/css/pages.css?v=7">
 </head>
 <body class="page-home">
 
 <header class="site-header" data-roux-header></header>
 
+<main>
+<h1 class="sr-only">Roux Labs — FlexPort. Zero-U cable management, made in the USA.</h1>
+
 <!-- ============================================================
-     INTRO — centered logo + live MSP timestamp.
+     INTRO — centered logo + MSP timestamp + brand trust line.
+     The trust line answers "what is this?" in 4 words without
+     breaking the Supreme grammar (small mono caps only).
      ============================================================ -->
 <section class="home-intro">
     <a class="home-intro-brand" href="index.html" aria-label="Roux Labs home">
         <img src="assets/img/logo-roux.png" alt="Roux Labs">
     </a>
     <div class="home-intro-stamp mono" data-home-timestamp></div>
+    <div class="home-intro-thesis mono">Zero-U Cable Management · Patented · Made in USA</div>
 </section>
 
 <!-- ============================================================
@@ -59,19 +65,22 @@
     <div class="right">
         <a href="flexport.html">flexport zero-u</a>
         <span class="sep">·</span>
+        <a href="story.html">story</a>
+        <span class="sep">·</span>
         <a href="about.html">grey space</a>
         <span class="sep">·</span>
         <a href="support.html">support</a>
     </div>
 </nav>
+</main>
 
 <footer class="site-footer" data-roux-footer></footer>
 
 <!-- ============================================================
      Scripts
      ============================================================ -->
-<script src="assets/js/products.js?v=6"></script>
-<script src="assets/js/cart.js?v=6"></script>
+<script src="assets/js/products.js?v=7"></script>
+<script src="assets/js/cart.js?v=7"></script>
 <script>
 (function(){
     /* ---------- MSP timestamp ----------
@@ -132,11 +141,17 @@
 
     var strip = document.querySelector("[data-home-strip]");
     if (strip){
-        strip.innerHTML = SLICES.map(function(s){
-            var style = "background-image:url('" + s.src + "');"
-                      + "background-position:" + s.pos + ";";
-            return '<a class="home-slice" href="' + s.href + '" aria-label="View product">'
-                +   '<div class="home-slice-img" style="' + style + '"></div>'
+        // First 4 slivers eager (above the fold across all viewports);
+        // rest lazy so off-screen photos don't burn ~1.6MB on initial paint.
+        strip.innerHTML = SLICES.map(function(s, i){
+            var eager = i < 4;
+            var attrs = 'src="' + s.src + '" alt=""'
+                      + ' loading="' + (eager ? "eager" : "lazy") + '"'
+                      + ' decoding="async"'
+                      + (eager ? ' fetchpriority="high"' : '')
+                      + ' style="object-position:' + s.pos + '"';
+            return '<a class="home-slice" href="' + s.href + '" aria-label="View FlexPort">'
+                +   '<img class="home-slice-img" ' + attrs + '>'
                 + '</a>';
         }).join("");
     }

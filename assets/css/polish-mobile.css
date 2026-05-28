@@ -40,9 +40,14 @@ a, button, [role="button"], input, select, textarea, label{
    are inert today but light up the moment the meta is updated.
    ============================================================ */
 
-/* Floating chat launcher — lift above the home indicator. */
+/* Floating chat launcher — lift above the home indicator AND above
+   the orange Add-To-Cart button on the PDP so they never overlap. */
 .chat-fab{
     right: max(clamp(16px, 2.4vw, 32px), env(safe-area-inset-right));
+    bottom: calc(max(clamp(16px, 2.4vw, 32px), env(safe-area-inset-bottom)) + 72px);
+}
+/* Non-PDP pages don't need the lift — restore the snug bottom anchor. */
+body:not(.page-pdp) .chat-fab{
     bottom: max(clamp(16px, 2.4vw, 32px), env(safe-area-inset-bottom));
 }
 

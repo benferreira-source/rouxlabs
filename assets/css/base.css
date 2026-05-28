@@ -20,7 +20,7 @@
     --bone:       #ffffff;       /* was off-white, now white   */
     --grey-900:   #111111;
     --grey-700:   #555555;       /* neutral grey, secondary    */
-    --grey-500:   #909090;       /* neutral grey, tertiary     */
+    --grey-500:   #707070;       /* tertiary text — darkened for WCAG AA (~5.3:1 on white) */
     --grey-300:   #c8c8c8;
     --grey-100:   #f2f2f2;       /* cool, neutral light grey   */
     --line:       #e6e6e6;       /* hairline divider           */
@@ -83,6 +83,20 @@ body{
 img, svg, video { display: block; max-width: 100%; height: auto; }
 button, input, select, textarea { font: inherit; color: inherit; }
 a { color: inherit; text-decoration: none; }
+
+/* Visually-hidden text for screen readers — used on pages whose
+   visual masthead is a logo image rather than a literal heading. */
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
 
 /* ------------------------------------------------------------
    Typography — Supreme neo-grotesque, quiet and small.
@@ -193,9 +207,12 @@ p.lead { font-size: 14px; line-height: 1.5; max-width: 64ch; }
 .btn-ghost:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 .btn-orange{
+    /* Safety-orange button — ink text on full-bright orange gives ~6.2:1
+       contrast (passes WCAG AAA) AND reads more tactical / construction
+       than white-on-orange (~3.4:1, failed AA). Brand orange stays loud. */
     background: var(--rl-orange);
     border-color: var(--rl-orange);
-    color: var(--paper);
+    color: var(--ink);
 }
 .btn-orange:hover { background: var(--rl-orange-dim); border-color: var(--rl-orange-dim); color: var(--paper); }
 

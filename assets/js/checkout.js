@@ -38,7 +38,24 @@
 
     function render(){
         if (items.length === 0){
-            itemsEl.innerHTML = '<div class="callout"><h2 class="h-md">YOUR CART IS EMPTY.</h2><p style="color:var(--grey-700)">Head back to the shop to add a set.</p><a href="shop.html" class="btn mt-4">Shop →</a></div>';
+            // Warm empty state: tease FlexPort with a real photo + price hook
+            // so a visitor landing on /checkout cold still gets the pitch.
+            itemsEl.innerHTML = ''
+              + '<div class="callout checkout-empty">'
+              +   '<div class="checkout-empty-eyebrow mono">cart · empty</div>'
+              +   '<h2 class="h-md">Nothing to check out yet.</h2>'
+              +   '<p style="color:var(--grey-700);max-width:48ch">Pick a colorway and a set size on the FlexPort page — Black, White, Orange, Red. Sets from $39.95. Free shipping over $150, ships in 3 business days.</p>'
+              +   '<div class="checkout-empty-card">'
+              +     '<a class="checkout-empty-thumb" href="flexport.html" aria-label="Shop FlexPort">'
+              +       '<img src="assets/img/products/flexport-bk-04.jpg?v=7" alt="FlexPort Zero-U panel, set of 4, black" loading="eager" width="240" height="240">'
+              +     '</a>'
+              +     '<div class="checkout-empty-meta">'
+              +       '<div class="checkout-empty-name">FlexPort Zero-U Panel</div>'
+              +       '<div class="checkout-empty-sub mono">4 colors · 4 set sizes · L/R · From $39.95</div>'
+              +       '<a class="btn btn-orange" href="flexport.html">Shop FlexPort →</a>'
+              +     '</div>'
+              +   '</div>'
+              + '</div>';
             totalsEl.innerHTML = '';
             goBtn.style.display = 'none';
             return;

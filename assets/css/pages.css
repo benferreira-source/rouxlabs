@@ -117,18 +117,30 @@
 }
 
 .product-grid{
+    /* auto-fit + bounded minmax: each track is 280–360px. Empty tracks
+       collapse (no phantom columns); filled tracks center via
+       justify-content. A solo FlexPort card centers cleanly at 360px;
+       3–4 cards form a tidy row; mobile collapses to single column. */
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+    justify-content: center;
     gap: 0;
     border-bottom: 1px solid var(--ink);
 }
-@media (max-width: 1200px){ .product-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 900px){  .product-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px){  .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px){
+    .product-grid{
+        grid-template-columns: 1fr;
+        padding: 0 var(--gutter);
+    }
+}
 
 .product-card{
-    border-right: 1px solid var(--line);
-    border-top: 1px solid var(--line);
+    /* Hairline frame around each card. With auto-fit grid, the old
+       :nth-child(4n) right-border logic broke at different counts —
+       a 4-sided 1px frame works at any count and any viewport. */
+    border: 1px solid var(--line);
+    margin-top: -1px;     /* collapse adjacent borders into single hairline */
+    margin-left: -1px;
     padding: var(--s-2);
     background: var(--paper);
     transition: background 0.12s ease;
@@ -138,20 +150,6 @@
     position: relative;
 }
 .product-card:hover { background: var(--grey-100); }
-.product-grid > .product-card:nth-child(4n) { border-right: 0; }
-@media (max-width: 1200px){
-    .product-grid > .product-card { border-right: 1px solid var(--line); }
-    .product-grid > .product-card:nth-child(4n) { border-right: 1px solid var(--line); }
-    .product-grid > .product-card:nth-child(3n) { border-right: 0; }
-}
-@media (max-width: 900px){
-    .product-grid > .product-card:nth-child(3n) { border-right: 1px solid var(--line); }
-    .product-grid > .product-card:nth-child(2n) { border-right: 0; }
-}
-@media (max-width: 480px){
-    .product-grid > .product-card { border-right: 1px solid var(--line); }
-    .product-grid > .product-card:nth-child(2n) { border-right: 0; }
-}
 
 .product-card .image{
     aspect-ratio: 1 / 1;
@@ -1299,7 +1297,7 @@ body.page-story{ background: var(--paper); color: var(--ink); }
 }
 @media (min-width: 900px){
     .page-story .story-hero-grid{
-        grid-template-columns: 1.35fr 1fr;
+        grid-template-columns: 1fr 1.1fr;
         gap: clamp(40px, 6vw, 96px);
     }
 }
@@ -1307,9 +1305,9 @@ body.page-story{ background: var(--paper); color: var(--ink); }
 .page-story .story-headline{
     font-family: var(--f-display);
     font-weight: 700;
-    font-size: clamp(40px, 7vw, 88px);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
+    font-size: clamp(48px, 8vw, 104px);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
     margin: var(--s-3) 0 var(--s-4);
     text-transform: uppercase;
 }
@@ -1467,9 +1465,9 @@ body.page-home .home-slice{
 body.page-home .home-slice-img{
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 320ms ease;
 }
 body.page-home .home-slice:hover .home-slice-img{ transform: scale(1.04); }
@@ -1546,18 +1544,23 @@ body.page-home .home-strip-links .sep{ color: var(--grey-500); }
     text-transform: uppercase;
     line-height: 1.5;
     color: var(--grey-700);
+    /* Masthead rule above the byline so it reads as editorial credit,
+       not metadata. */
+    border-top: 1px solid var(--ink);
+    padding-top: var(--s-2);
 }
 .page-story .story-portrait-cap .name{
     color: var(--ink);
     font-weight: 600;
-    font-size: 11px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
 }
 .page-story .story-portrait-cap .title,
 .page-story .story-portrait-cap .affil{ text-transform: uppercase; }
 
 @media (min-width: 900px){
     .page-story .story-portrait{
-        max-width: 460px;
+        max-width: 520px;
     }
 }
 @media (max-width: 899px){
@@ -1566,4 +1569,61 @@ body.page-home .home-strip-links .sep{ color: var(--grey-500); }
         margin: 0 auto;
     }
     .page-story .story-portrait img{ aspect-ratio: 1 / 1; }
+}
+
+
+/* ============================================================
+   CHECKOUT — Warm empty state. Keeps the brand pitch alive
+   when someone lands on /checkout cold (deep link, stale tab).
+   ============================================================ */
+.page-checkout .checkout-empty{ padding: var(--s-6) var(--s-5); }
+.page-checkout .checkout-empty-eyebrow{
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin-bottom: var(--s-3);
+}
+.page-checkout .checkout-empty-card{
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: var(--s-5);
+    align-items: center;
+    margin-top: var(--s-5);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+}
+@media (max-width: 540px){
+    .page-checkout .checkout-empty-card{
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+    }
+}
+.page-checkout .checkout-empty-thumb{
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--grey-100);
+    border: 1px solid var(--line);
+    overflow: hidden;
+}
+.page-checkout .checkout-empty-thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.page-checkout .checkout-empty-name{
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+}
+.page-checkout .checkout-empty-sub{
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin: 6px 0 var(--s-3);
 }

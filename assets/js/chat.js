@@ -53,7 +53,6 @@
       +     '<circle cx="12" cy="11" r="1.1" fill="currentColor"/>'
       +     '<circle cx="15" cy="11" r="1.1" fill="currentColor"/>'
       +   '</svg>'
-      +   '<span class="chat-fab-dot" aria-hidden="true"></span>'
       + '</button>'
       + '<aside class="chat-panel" data-chat-panel role="dialog" aria-label="Roux Support" aria-hidden="true">'
       +   '<header class="chat-head">'

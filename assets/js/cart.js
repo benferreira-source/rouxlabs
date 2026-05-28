@@ -262,7 +262,7 @@
     function loadSupportChat(){
         if (document.querySelector('script[data-roux-chat]')) return;
         var s = document.createElement("script");
-        s.src = "assets/js/chat.js?v=6";
+        s.src = "assets/js/chat.js?v=7";
         s.defer = true;
         s.setAttribute("data-roux-chat", "");
         document.body.appendChild(s);
@@ -271,7 +271,7 @@
     function loadNewsletter(){
         if (document.querySelector('script[data-roux-newsletter]')) return;
         var s = document.createElement("script");
-        s.src = "assets/js/newsletter.js?v=6";
+        s.src = "assets/js/newsletter.js?v=7";
         s.defer = true;
         s.setAttribute("data-roux-newsletter", "");
         document.body.appendChild(s);
@@ -286,7 +286,7 @@
             if (document.querySelector('link[data-roux-' + name + ']')) return;
             var l = document.createElement("link");
             l.rel = "stylesheet";
-            l.href = "assets/css/" + name + ".css?v=6";
+            l.href = "assets/css/" + name + ".css?v=7";
             l.setAttribute("data-roux-" + name, "");
             document.head.appendChild(l);
         });
@@ -331,7 +331,12 @@
         if (productId === "flexport-zero-u"){
             const colorName = { BK: "Black", WK: "White", OK: "Orange", RK: "Red" }[colorKey] || "Black";
             const size = FLEXPORT_SET_SIZES.indexOf(setSize) === -1 ? FLEXPORT_DEFAULT_SET : setSize;
-            return '<img src="' + flexportImgPath(colorKey, setSize) + '" alt="FlexPort Zero-U Panel, ' + colorName + ', set of ' + size + '" loading="lazy">';
+            // data-caliper + data-mm-per-px: caliper.js attaches a digital
+            // caliper cursor to this image. Calibration ~0.34 mm/px matches
+            // the standard 1U FlexPort panel framed in our 1500px photos.
+            return '<img src="' + flexportImgPath(colorKey, setSize)
+                 + '" alt="FlexPort Zero-U Panel, ' + colorName + ', set of ' + size
+                 + '" loading="lazy" width="1500" height="1500" data-caliper data-mm-per-px="0.34">';
         }
         if (productId === "roux-strap"){
             return `<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

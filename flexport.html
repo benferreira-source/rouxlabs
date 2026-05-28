@@ -23,9 +23,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=2">
-<link rel="stylesheet" href="assets/css/pages.css?v=2">
-<link rel="stylesheet" href="assets/css/polish-pdp.css?v=2">
+<link rel="stylesheet" href="assets/css/base.css?v=7">
+<link rel="stylesheet" href="assets/css/pages.css?v=7">
+<link rel="stylesheet" href="assets/css/polish-pdp.css?v=7">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -63,6 +63,7 @@
 <body class="page-pdp">
 
 <header class="site-header" data-roux-header></header>
+<main>
 
 <div class="container pdp-breadcrumb">
   <div class="crumbs">
@@ -80,6 +81,7 @@
     <h1>FlexPort<br>Zero-U Panel</h1>
     <p class="lead" data-pdp-lead></p>
     <div class="pdp-price" data-pdp-price>$69.95</div>
+    <div class="pdp-trust mono">Patented · Tool-free · Made in USA</div>
 
     <div class="pdp-section">
       <h3>Colorway</h3>
@@ -87,7 +89,7 @@
     </div>
 
     <div class="pdp-section">
-      <h3>Orientation</h3>
+      <h3>Orientation <span class="pdp-section-help">Pick the side cables exit your rack. For a set of 8 or 12, most installers split 50/50 L+R.</span></h3>
       <div class="orientation-toggle" data-pdp-orient></div>
     </div>
 
@@ -110,7 +112,7 @@
       <div class="pdp-microcopy">ships in 3 business days · free shipping over $150</div>
     </div>
 
-    <div class="pdp-section">
+    <div class="pdp-section" id="specs">
       <h3>Specifications</h3>
       <dl class="specs" data-pdp-specs></dl>
       <div class="pdp-sku-line"><span class="lbl">sku</span><span class="val" data-pdp-sku>FP-BK-04-L</span></div>
@@ -135,10 +137,12 @@
   </div>
 </section>
 
+</main>
 <footer class="site-footer" data-roux-footer></footer>
 
-<script src="assets/js/products.js?v=2"></script>
-<script src="assets/js/cart.js?v=2"></script>
+<script src="assets/js/products.js?v=7"></script>
+<script src="assets/js/cart.js?v=7"></script>
+<script src="assets/js/caliper.js?v=7" defer></script>
 <script>
 (function(){
     const PRODUCT = window.ROUX.findProduct("flexport-zero-u");
@@ -186,9 +190,12 @@
                  + '</button>';
         }).join("");
 
-        // Orientation L/R
+        // Orientation L/R — render a glyph (← / →) so the meaning of
+        // each option is parseable at a glance, not just from copy.
         el.orient.innerHTML = PRODUCT.orientations.map(function(o){
+            var glyph = o.key === "L" ? "←" : "→";
             return '<div class="opt' + (state.orientation === o.key ? ' active' : '') + '" data-set-orient="' + o.key + '">'
+                 + '<span class="orient-glyph" aria-hidden="true">' + glyph + '</span>'
                  + '<span>' + o.label + '</span>'
                  + '<span class="sub">' + o.sub + '</span>'
                  + '</div>';

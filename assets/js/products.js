@@ -55,10 +55,14 @@ window.ROUX_PRODUCTS = [
         }
     },
 
-    /* ----- Accessories (placeholder SKUs — drop in real ones) -- */
+    /* ----- Accessories (placeholder SKUs — drop in real ones) --
+       inactive: true hides these on /shop until real product
+       photography exists. SVG silhouette placeholders next to
+       FlexPort's real photos undermined the brand quality. */
     {
         id: "roux-strap",
         category: "accessories",
+        inactive: true,
         name: "Roux Hook & Loop Straps",
         tagline: "Reusable, low-profile cable straps. 25-pack.",
         priceFrom: 14.95,
@@ -90,6 +94,7 @@ window.ROUX_PRODUCTS = [
     {
         id: "label-pack",
         category: "accessories",
+        inactive: true,
         name: "Cable ID Label Pack",
         tagline: "Pre-printed, color-matched cable labels. 50 per pack.",
         priceFrom: 9.95,
