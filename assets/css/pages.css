@@ -1291,6 +1291,19 @@ body.page-story{ background: var(--paper); color: var(--ink); }
     padding: clamp(56px, 10vw, 120px) 0 clamp(32px, 5vw, 64px);
     border-bottom: 1px solid var(--line);
 }
+.page-story .story-hero-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+}
+@media (min-width: 900px){
+    .page-story .story-hero-grid{
+        grid-template-columns: 1.35fr 1fr;
+        gap: clamp(40px, 6vw, 96px);
+    }
+}
+.page-story .story-hero-text{ min-width: 0; }
 .page-story .story-headline{
     font-family: var(--f-display);
     font-weight: 700;
@@ -1505,59 +1518,55 @@ body.page-home .home-strip-links .sep{ color: var(--grey-500); }
 }
 
 /* ============================================================
-   STORY PORTRAIT — Johnny credit byline block
+   STORY PORTRAIT — Johnny credit, top-right of the hero
    ============================================================ */
 .page-story .story-portrait{
+    margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: var(--s-3);
-    margin: clamp(40px, 6vw, 80px) 0 0;
-    max-width: 320px;
+    justify-self: end;
+    width: 100%;
 }
 .page-story .story-portrait img{
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
-    object-position: center 20%;
+    object-position: center 22%;
     background: var(--grey-100);
     border: 1px solid var(--ink);
-    filter: grayscale(0.15);
-    transition: filter 240ms ease;
+    filter: grayscale(1) contrast(1.04);
 }
-.page-story .story-portrait img:hover{ filter: grayscale(0); }
 .page-story .story-portrait-cap{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     font-family: var(--f-mono);
     font-size: 10px;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    line-height: 1.5;
     color: var(--grey-700);
-    line-height: 1.6;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
 }
-.page-story .story-portrait-cap .name{ color: var(--ink); font-weight: 600; }
-.page-story .story-portrait-cap .sep{ color: var(--grey-500); }
-@media (min-width: 720px){
+.page-story .story-portrait-cap .name{
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 11px;
+}
+.page-story .story-portrait-cap .title,
+.page-story .story-portrait-cap .affil{ text-transform: uppercase; }
+
+@media (min-width: 900px){
     .page-story .story-portrait{
-        flex-direction: row;
-        align-items: center;
-        gap: var(--s-5);
-        max-width: 100%;
+        max-width: 460px;
     }
-    .page-story .story-portrait img{
-        width: 220px;
-        flex-shrink: 0;
+}
+@media (max-width: 899px){
+    .page-story .story-portrait{
+        max-width: 360px;
+        margin: 0 auto;
     }
-    .page-story .story-portrait-cap{
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-        line-height: 1.5;
-    }
-    .page-story .story-portrait-cap .sep{ display: none; }
+    .page-story .story-portrait img{ aspect-ratio: 1 / 1; }
 }
