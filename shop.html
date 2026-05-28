@@ -3,103 +3,186 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Shop — Roux Labs</title>
+<title>The Catalogue — Roux Labs</title>
 <link rel="icon" type="image/png" href="assets/img/logo-roux.png">
-<meta name="description" content="Shop FlexPort cable management systems, accessories, and more from Roux Labs. Hardware made in the USA.">
+<meta name="description" content="The Roux Labs catalogue. FlexPort zero-U cable management in four colourways and four set sizes. Made in the USA.">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Roux Labs">
-<meta property="og:title" content="Shop · Roux Labs">
-<meta property="og:description" content="FlexPort zero-U cable management, accessories, and more from Roux Labs. Hardware made in the USA.">
+<meta property="og:title" content="The Catalogue · Roux Labs">
+<meta property="og:description" content="FlexPort zero-U cable management in four colourways and four set sizes. The full Roux Labs catalogue.">
 <meta property="og:url" content="https://rouxlabs.benops.dev/shop.html">
 <meta property="og:image" content="https://rouxlabs.benops.dev/assets/img/products/flexport-bk-04.jpg">
 <meta property="og:image:alt" content="FlexPort Zero-U cable management panels by Roux Labs.">
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Shop · Roux Labs">
-<meta name="twitter:description" content="FlexPort zero-U cable management, accessories, and more from Roux Labs. Hardware made in the USA.">
+<meta name="twitter:title" content="The Catalogue · Roux Labs">
+<meta name="twitter:description" content="FlexPort zero-U cable management in four colourways and four set sizes. The full Roux Labs catalogue.">
 <meta name="twitter:image" content="https://rouxlabs.benops.dev/assets/img/products/flexport-bk-04.jpg">
 <meta name="twitter:image:alt" content="FlexPort Zero-U cable management panels by Roux Labs.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=7">
-<link rel="stylesheet" href="assets/css/pages.css?v=7">
+<link rel="stylesheet" href="assets/css/base.css?v=8">
+<link rel="stylesheet" href="assets/css/pages.css?v=8">
 </head>
 <body class="page-shop">
 <header class="site-header" data-roux-header></header>
 
 <main>
-<h1 class="sr-only">Shop · Roux Labs</h1>
+<h1 class="sr-only">The Catalogue — Roux Labs</h1>
 
-<div class="shop-head mono">
-  <span class="shop-head-label" data-shop-heading>shop · all products</span>
-  <span class="shop-head-sep">·</span>
-  <span data-shop-count></span>
-</div>
+<!-- ============================================================
+     LOOKBOOK STRIP — sliced install photography, full-bleed.
+     Re-uses the home sliced-strip mechanic. Sets brand voice
+     and occupies the upper viewport so the page never feels
+     deserted at first paint.
+     ============================================================ -->
+<nav class="shop-strip" data-shop-strip aria-label="Roux Labs in the rack"></nav>
 
-<div class="shop-filter-row" data-shop-filter></div>
+<!-- ============================================================
+     HEADER — eyebrow + position sub-line. No count, no filter
+     row. With one SKU, both read as apology.
+     ============================================================ -->
+<section class="shop-header">
+  <div class="shop-header-eyebrow mono">The Catalogue · Spring 2026</div>
+  <div class="shop-header-sub mono">Four colourways · Two orientations · Eight set sizes</div>
+</section>
 
-<div class="product-grid" data-shop-grid></div>
+<!-- ============================================================
+     002 — COLOURWAYS · the 4×4 variant grid.
+     Every cell is a real, deep-linkable SKU. Color-as-row-label
+     gives editorial structure. A full-bleed install interlude
+     breaks the rhythm between row 2 and row 3.
+     ============================================================ -->
+<section class="shop-section">
+  <div class="shop-section-head mono">
+    <span class="shop-section-num">002</span>
+    <span class="shop-section-label">Colourways</span>
+    <span class="shop-section-rule" aria-hidden="true"></span>
+  </div>
+  <div class="shop-grid" data-shop-grid></div>
+</section>
+
+<!-- ============================================================
+     003 — IN THE FIELD · install context. Proof by photograph.
+     ============================================================ -->
+<section class="shop-section">
+  <div class="shop-section-head mono">
+    <span class="shop-section-num">003</span>
+    <span class="shop-section-label">In The Field</span>
+    <span class="shop-section-rule" aria-hidden="true"></span>
+  </div>
+  <div class="shop-field">
+    <figure class="shop-field-tile">
+      <img src="assets/img/install-rack-closeup.jpg?v=8" alt="FlexPort installed on a populated rack — close detail." loading="lazy" width="1500" height="1000">
+      <figcaption class="mono">Datastrait · MN · 2026.04</figcaption>
+    </figure>
+    <figure class="shop-field-tile">
+      <img src="assets/img/install-flexport-detail.jpg?v=8" alt="FlexPort detail — mount, jack, cable exit." loading="lazy" width="1500" height="1000">
+      <figcaption class="mono">Off-rail · cable exit · 2026.04</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================================================
+     CODA — closing line. A position, not a promise.
+     ============================================================ -->
+<div class="shop-coda mono">The catalogue grows slowly. On purpose.</div>
 </main>
 
 <footer class="site-footer" data-roux-footer></footer>
-<script src="assets/js/products.js?v=7"></script>
-<script src="assets/js/cart.js?v=7"></script>
+<script src="assets/js/products.js?v=8"></script>
+<script src="assets/js/cart.js?v=8"></script>
 <script>
 (function(){
-    const params = new URLSearchParams(location.search);
-    const cat = params.get("cat");
-    const filters = [
-        { key: null, label: "All" },
-        { key: "flexport", label: "FlexPort" },
-        { key: "accessories", label: "Accessories" }
+    /* ---------- Lookbook strip ----------
+       Sliced from the 3 install photos. ~12 narrow slivers with
+       varied object-position so each one reads as its own crop.
+       Mirrors the home strip mechanic at half the height. */
+    var STRIP = [
+        { src: "assets/img/install-rack-full.jpg",       pos: "12% 50%" },
+        { src: "assets/img/install-rack-full.jpg",       pos: "32% 50%" },
+        { src: "assets/img/install-rack-full.jpg",       pos: "55% 50%" },
+        { src: "assets/img/install-rack-full.jpg",       pos: "78% 50%" },
+        { src: "assets/img/install-rack-closeup.jpg",    pos: "25% 50%" },
+        { src: "assets/img/install-rack-closeup.jpg",    pos: "55% 50%" },
+        { src: "assets/img/install-rack-closeup.jpg",    pos: "82% 50%" },
+        { src: "assets/img/install-flexport-detail.jpg", pos: "20% 50%" },
+        { src: "assets/img/install-flexport-detail.jpg", pos: "45% 50%" },
+        { src: "assets/img/install-flexport-detail.jpg", pos: "70% 50%" },
+        { src: "assets/img/install-flexport-detail.jpg", pos: "88% 50%" },
+        { src: "assets/img/install-rack-full.jpg",       pos: "92% 50%" }
     ];
-    const filterEl = document.querySelector("[data-shop-filter]");
-    filterEl.innerHTML = filters.map(function(f){
-        const active = (cat || null) === f.key ? " is-active" : "";
-        const href = f.key ? "shop.html?cat=" + f.key : "shop.html";
-        return '<a href="' + href + '" class="shop-filter' + active + '">' + f.label.toLowerCase() + '</a>';
-    }).join("");
+    var stripEl = document.querySelector("[data-shop-strip]");
+    if (stripEl){
+        stripEl.innerHTML = STRIP.map(function(s, i){
+            var eager = i < 4;
+            return '<div class="shop-strip-cell">'
+                +    '<img src="' + s.src + '?v=8" alt="" '
+                +    'loading="' + (eager ? "eager" : "lazy") + '" decoding="async" '
+                +    (eager ? 'fetchpriority="high" ' : '')
+                +    'style="object-position:' + s.pos + '">'
+                + '</div>';
+        }).join("");
+    }
 
-    // Hide products flagged inactive (accessories use SVG placeholders
-    // that visually compete with the real FlexPort photography — they
-    // ship when real product photos are ready).
-    const visible = window.ROUX_PRODUCTS.filter(function(p){ return p.inactive !== true; });
-    const list = cat
-        ? visible.filter(function(p){ return p.category === cat; })
-        : visible;
+    /* ---------- 4×4 Variant Grid ----------
+       Iterates the 4 colourways × 4 set sizes from products.js.
+       Each tile is a real photo of a real buyable SKU, deep-linked
+       to flexport.html with ?color and ?size pre-selected.
+       Between row 2 and row 3 we drop a full-bleed install photo
+       spanning all 4 columns — Bottega "hero row" / Patek interlude. */
+    var P = window.ROUX.findProduct("flexport-zero-u");
+    var COLOR_LABEL = { BK:"Black", WK:"White", OK:"Orange", RK:"Red" };
+    function pad(n){ return String(n).padStart(2,"0"); }
+    function flexportImg(color, size){
+        return "assets/img/products/flexport-" + color.toLowerCase() + "-" + pad(size) + ".jpg";
+    }
+    function fmtPrice(n){ return "$" + n.toFixed(2); }
 
-    // Refresh heading + count
-    const headLabel = cat
-        ? "shop · " + cat
-        : "shop · all products";
-    document.querySelector("[data-shop-heading]").textContent = headLabel;
-    document.querySelector("[data-shop-count]").textContent = list.length + " product" + (list.length === 1 ? "" : "s");
+    var pieces = [];
+    P.colors.forEach(function(c, ci){
+        P.sets.forEach(function(s){
+            pieces.push({ type: "tile", color: c.key, size: s.size, price: s.price });
+        });
+        // Mid-grid editorial interlude after row 2 (White).
+        if (ci === 1){
+            pieces.push({ type: "interlude" });
+        }
+    });
 
-    const grid = document.querySelector("[data-shop-grid]");
-    grid.innerHTML = list.map(function(p){
-        const href = p.id === "flexport-zero-u" ? "flexport.html" : "product.html?id=" + p.id;
-        const swatches = (p.colors || []).map(function(c){ return '<span class="swatch ' + c.swatchClass + '"></span>'; }).join("");
-        return `
-            <a class="product-card" href="${href}">
-              <div class="badge-row">
-                ${(p.badges || []).slice(0,1).map(function(b){ return '<span class="tag tag-solid">' + b + '</span>'; }).join("")}
-              </div>
-              <div class="image">${window.ROUX.productSvg(p.id, (p.colors[0]||{}).key)}</div>
-              <div class="label">
-                <div class="name">${p.name}</div>
-                <div class="price">From ${window.ROUX.formatPrice(p.priceFrom)}</div>
-              </div>
-              <div class="meta">
-                <span>${(p.colors || []).length} Colorway${p.colors.length>1?'s':''}</span>
-                <span>·</span>
-                <span>${(p.sets || []).length} Set Size${p.sets.length>1?'s':''}</span>
-              </div>
-              <div class="flex gap-2 mt-2">${swatches}</div>
-            </a>
-        `;
-    }).join("");
+    var gridEl = document.querySelector("[data-shop-grid]");
+    if (gridEl){
+        gridEl.innerHTML = pieces.map(function(p, i){
+            if (p.type === "interlude"){
+                return '<a class="shop-grid-interlude" href="flexport.html" aria-label="See FlexPort installed">'
+                    +    '<img src="assets/img/install-rack-full.jpg?v=8" alt="FlexPort populated across a full rack." loading="lazy" width="2000" height="800" style="object-position:50% 40%">'
+                    +    '<div class="shop-grid-interlude-cap mono">'
+                    +      '<span>In Situ · 24 Racks · Datastrait MN</span>'
+                    +      '<span aria-hidden="true">↗</span>'
+                    +    '</div>'
+                    + '</a>';
+            }
+            var colorLabel = COLOR_LABEL[p.color] || p.color;
+            var href = "flexport.html?color=" + p.color + "&size=" + p.size;
+            // Color label sits to the LEFT of the first tile in each row.
+            var rowLabel = (p.size === P.sets[0].size)
+                ? '<div class="shop-grid-rowlabel mono"><span class="shop-rowlabel-name">' + colorLabel + '</span><span class="shop-rowlabel-key">' + p.color + '</span></div>'
+                : '';
+            return rowLabel
+                + '<a class="shop-tile" href="' + href + '" aria-label="' + colorLabel + ' · set of ' + p.size + '">'
+                +   '<div class="shop-tile-img">'
+                +     '<img src="' + flexportImg(p.color, p.size) + '?v=8" alt="FlexPort ' + colorLabel + ', set of ' + p.size + '" '
+                +     'loading="' + (i < 6 ? "eager" : "lazy") + '" decoding="async" width="1500" height="1500">'
+                +   '</div>'
+                +   '<div class="shop-tile-meta mono">'
+                +     '<span class="shop-tile-set">Set of ' + p.size + '</span>'
+                +     '<span class="shop-tile-price">' + fmtPrice(p.price) + '</span>'
+                +   '</div>'
+                + '</a>';
+        }).join("");
+    }
 })();
 </script>
 </body>
