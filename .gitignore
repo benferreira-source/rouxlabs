@@ -19,3 +19,4 @@ node_modules/
 
 # OS junk
 Thumbs.db
+.vercel
