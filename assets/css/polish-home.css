@@ -71,22 +71,28 @@ body.page-home .home-intro-stamp{
 }
 
 
-/* ----- 3. Strip: edge-to-edge tall narrow slices ---------- */
+/* ----- 3. Strip: edge-to-edge narrow slivers --------------
+   Flex row, each sliver = 1/N of viewport via flex:1 1 0. At 28
+   slices: ~51px on a 1440 viewport, ~68px on 1920 — Supreme-thin
+   regardless of screen size. Mobile media query below switches
+   the strip to overflow-x scroll with fixed-width slivers. */
 body.page-home .home-strip{
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
+    display: flex;
+    flex-wrap: nowrap;
     gap: 1px;
     background: var(--line);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     margin-top: clamp(36px, 6vw, 88px);
-    height: clamp(380px, 48vh, 540px);
+    height: clamp(440px, 56vh, 640px);
     overflow: hidden;
 }
 body.page-home .home-slice{
     position: relative;
+    flex: 1 1 0;
+    min-width: 0;
     display: block;
+    height: 100%;
     overflow: hidden;
     text-decoration: none;
     background: var(--grey-100);
@@ -106,19 +112,9 @@ body.page-home .home-slice:focus-visible{
     outline: 2px solid var(--ink);
     outline-offset: -3px;
 }
-body.page-home .home-slice-tag{
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    z-index: 2;
-    padding: 3px 6px;
-    background: var(--ink);
-    color: var(--paper);
-    font-family: var(--f-mono);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: lowercase;
-}
+/* Tag overlays removed. Defensive display:none catches any cached
+   HTML that still emits the .home-slice-tag span. */
+body.page-home .home-slice-tag{ display: none; }
 
 
 /* ----- 4. Link row below the strip ------------------------ */
@@ -153,29 +149,28 @@ body.page-home .home-strip-links .sep{
 
 /* ----- 5. Big-screen scale ------------------------------- */
 @media (min-width: 1800px){
-    body.page-home .home-strip{ height: clamp(460px, 38vh, 620px); }
+    body.page-home .home-strip{ height: clamp(520px, 42vh, 720px); }
     body.page-home .home-intro-stamp{ font-size: 12px; }
 }
 
 
-/* ----- 6. Mobile: strip becomes a horizontal scroller ----- */
+/* ----- 6. Mobile: strip becomes a horizontal scroller -----
+   At <=720px the slivers go fixed-width and the strip scrolls
+   horizontally with momentum (28 × 64px = ~1792px > viewport). */
 @media (max-width: 720px){
     body.page-home .home-strip{
-        display: flex;
-        flex-wrap: nowrap;
         overflow-x: auto;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        height: 380px;
+        height: 420px;
         margin-top: var(--s-6);
     }
     body.page-home .home-strip::-webkit-scrollbar{ display: none; }
     body.page-home .home-slice{
         flex: 0 0 64px;
         scroll-snap-align: start;
-        height: 100%;
     }
     body.page-home .home-strip-links{
         flex-direction: column;
@@ -190,7 +185,7 @@ body.page-home .home-strip-links .sep{
     body.page-home .home-intro{
         padding-top: clamp(56px, 16vw, 96px);
     }
-    body.page-home .home-strip{ height: 340px; }
+    body.page-home .home-strip{ height: 380px; }
     body.page-home .home-slice{ flex-basis: 56px; }
     body.page-home .home-strip-links{
         font-size: 10px;

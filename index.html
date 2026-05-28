@@ -23,8 +23,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=2">
-<link rel="stylesheet" href="assets/css/pages.css?v=2">
+<link rel="stylesheet" href="assets/css/base.css?v=6">
+<link rel="stylesheet" href="assets/css/pages.css?v=6">
 </head>
 <body class="page-home">
 
@@ -70,15 +70,17 @@
 <!-- ============================================================
      Scripts
      ============================================================ -->
-<script src="assets/js/products.js?v=2"></script>
-<script src="assets/js/cart.js?v=2"></script>
+<script src="assets/js/products.js?v=6"></script>
+<script src="assets/js/cart.js?v=6"></script>
 <script>
 (function(){
-    /* ---------- NYC timestamp ---------- */
+    /* ---------- MSP timestamp ----------
+       Brand is Made in MN/USA — Minneapolis-St. Paul is the home city,
+       so the brand timestamp matches the city code and uses Central time. */
     var stamp = document.querySelector("[data-home-timestamp]");
     if (stamp){
         var parts = new Intl.DateTimeFormat("en-US", {
-            timeZone: "America/New_York",
+            timeZone: "America/Chicago",
             year: "numeric", month: "2-digit", day: "2-digit",
             hour: "2-digit", minute: "2-digit", hour12: true
         }).formatToParts(new Date());
@@ -88,31 +90,44 @@
         }
         stamp.textContent = p("month") + "/" + p("day") + "/" + p("year")
             + " " + p("hour") + ":" + p("minute")
-            + (p("dayPeriod") || "").toLowerCase() + " NYC";
+            + (p("dayPeriod") || "").toLowerCase() + " MSP";
     }
 
     /* ---------- Sliced strip ----------
-       Each entry frames a different focal point of a real product
-       photo (or rack-context shot) via object-position. Repeated
-       source images use different positions so they read as
-       independent crops. Tag is optional. */
+       28 narrow slivers, edge-to-edge. Each entry frames a different
+       focal point of a real product photo (or rack-context shot) via
+       background-position. Repeated source images use different
+       positions so each sliver reads as its own crop. No corner tags
+       on slivers — the imagery stands alone. */
     var SLICES = [
-        { src: "assets/img/products/flexport-bk-12.jpg", pos: "18% 50%", href: "flexport.html?color=BK", tag: "new" },
-        { src: "assets/img/products/flexport-bk-12.jpg", pos: "62% 50%", href: "flexport.html?color=BK" },
-        { src: "assets/img/products/flexport-rk-04.jpg", pos: "30% 50%", href: "flexport.html?color=RK", tag: "new" },
-        { src: "assets/img/install-rack-closeup.jpg",    pos: "40% 50%", href: "flexport.html",         tag: "rack" },
-        { src: "assets/img/products/flexport-wk-04.jpg", pos: "28% 50%", href: "flexport.html?color=WK", tag: "new" },
-        { src: "assets/img/products/flexport-wk-08.jpg", pos: "70% 50%", href: "flexport.html?color=WK" },
-        { src: "assets/img/install-flexport-detail.jpg", pos: "30% 50%", href: "flexport.html",         tag: "install" },
-        { src: "assets/img/install-flexport-detail.jpg", pos: "72% 50%", href: "flexport.html" },
-        { src: "assets/img/products/flexport-ok-12.jpg", pos: "22% 50%", href: "flexport.html?color=OK", tag: "new" },
-        { src: "assets/img/products/flexport-ok-12.jpg", pos: "66% 50%", href: "flexport.html?color=OK" },
-        { src: "assets/img/install-rack-full.jpg",       pos: "32% 50%", href: "about.html",            tag: "rack" },
-        { src: "assets/img/install-rack-full.jpg",       pos: "56% 50%", href: "about.html" },
-        { src: "assets/img/install-rack-full.jpg",       pos: "78% 50%", href: "about.html" },
-        { src: "assets/img/products/flexport-rk-12.jpg", pos: "42% 50%", href: "flexport.html?color=RK", tag: "new" },
-        { src: "assets/img/products/flexport-bk-04.jpg", pos: "50% 50%", href: "flexport.html?color=BK" },
-        { src: "assets/img/install-rack-closeup.jpg",    pos: "76% 50%", href: "flexport.html" }
+        { src: "assets/img/products/flexport-bk-12.jpg",      pos: "20% 50%", href: "flexport.html?color=BK" },
+        { src: "assets/img/products/flexport-bk-12.jpg",      pos: "60% 50%", href: "flexport.html?color=BK" },
+        { src: "assets/img/install-rack-closeup.jpg",         pos: "30% 50%", href: "flexport.html" },
+        { src: "assets/img/products/flexport-rk-04.jpg",      pos: "30% 50%", href: "flexport.html?color=RK" },
+        { src: "assets/img/products/flexport-wk-08.jpg",      pos: "25% 50%", href: "flexport.html?color=WK" },
+        { src: "assets/img/products/flexport-wk-08.jpg",      pos: "65% 50%", href: "flexport.html?color=WK" },
+        { src: "assets/img/install-flexport-detail.jpg",      pos: "30% 50%", href: "flexport.html" },
+        { src: "assets/img/install-flexport-detail.jpg",      pos: "60% 50%", href: "flexport.html" },
+        { src: "assets/img/products/flexport-ok-12.jpg",      pos: "22% 50%", href: "flexport.html?color=OK" },
+        { src: "assets/img/products/flexport-ok-12.jpg",      pos: "58% 50%", href: "flexport.html?color=OK" },
+        { src: "assets/img/install-rack-full.jpg",            pos: "25% 50%", href: "about.html" },
+        { src: "assets/img/install-rack-full.jpg",            pos: "55% 50%", href: "about.html" },
+        { src: "assets/img/install-rack-full.jpg",            pos: "82% 50%", href: "about.html" },
+        { src: "assets/img/products/flexport-rk-12.jpg",      pos: "30% 50%", href: "flexport.html?color=RK" },
+        { src: "assets/img/products/flexport-rk-12.jpg",      pos: "70% 50%", href: "flexport.html?color=RK" },
+        { src: "assets/img/products/flexport-bk-04.jpg",      pos: "50% 50%", href: "flexport.html?color=BK" },
+        { src: "assets/img/install-rack-closeup.jpg",         pos: "60% 50%", href: "flexport.html" },
+        { src: "assets/img/products/flexport-wk-04.jpg",      pos: "40% 50%", href: "flexport.html?color=WK" },
+        { src: "assets/img/products/flexport-ok-08.jpg",      pos: "35% 50%", href: "flexport.html?color=OK" },
+        { src: "assets/img/products/flexport-ok-08.jpg",      pos: "75% 50%", href: "flexport.html?color=OK" },
+        { src: "assets/img/install-flexport-detail.jpg",      pos: "45% 50%", href: "flexport.html" },
+        { src: "assets/img/install-flexport-detail.jpg",      pos: "78% 50%", href: "flexport.html" },
+        { src: "assets/img/products/flexport-bk-08.jpg",      pos: "40% 50%", href: "flexport.html?color=BK" },
+        { src: "assets/img/products/flexport-wk-12.jpg",      pos: "30% 50%", href: "flexport.html?color=WK" },
+        { src: "assets/img/products/flexport-wk-12.jpg",      pos: "65% 50%", href: "flexport.html?color=WK" },
+        { src: "assets/img/products/flexport-rk-08.jpg",      pos: "50% 50%", href: "flexport.html?color=RK" },
+        { src: "assets/img/install-rack-closeup.jpg",         pos: "82% 50%", href: "flexport.html" },
+        { src: "assets/img/products/flexport-ok-04.jpg",      pos: "45% 50%", href: "flexport.html?color=OK" }
     ];
 
     var strip = document.querySelector("[data-home-strip]");
@@ -120,12 +135,8 @@
         strip.innerHTML = SLICES.map(function(s){
             var style = "background-image:url('" + s.src + "');"
                       + "background-position:" + s.pos + ";";
-            var tag = s.tag
-                ? '<span class="home-slice-tag mono">' + s.tag + '</span>'
-                : '';
             return '<a class="home-slice" href="' + s.href + '" aria-label="View product">'
                 +   '<div class="home-slice-img" style="' + style + '"></div>'
-                +   tag
                 + '</a>';
         }).join("");
     }
