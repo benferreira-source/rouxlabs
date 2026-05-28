@@ -65,6 +65,7 @@
             { href: "shop.html", label: "Shop" },
             { href: "flexport.html", label: "FlexPort" },
             { href: "about.html", label: "Grey Space" },
+            { href: "story.html", label: "Story" },
             { href: "support.html", label: "Support" }
         ];
         const navLinks = nav.map(function(n){
@@ -110,6 +111,7 @@
             <nav class="footer-links" aria-label="Footer">
               <a href="about.html">about</a><span class="sep">·</span>
               <a href="support.html">f.a.q.</a><span class="sep">·</span>
+              <a href="story.html">inventor</a><span class="sep">·</span>
               <a href="flexport.html">sizing</a><span class="sep">·</span>
               <a href="support.html#contact">contact</a><span class="sep">·</span>
               <a href="about.html#patent">patent</a><span class="sep">·</span>

@@ -1280,3 +1280,126 @@ body.page-404 .nf-copy{
 
 body.nl-modal-open{ overflow: hidden; }
 
+
+/* ============================================================
+   STORY PAGE — Johnny / R&D timeline
+   Scoped to body.page-story
+   ============================================================ */
+body.page-story{ background: var(--paper); color: var(--ink); }
+
+.page-story .story-hero{
+    padding: clamp(56px, 10vw, 120px) 0 clamp(32px, 5vw, 64px);
+    border-bottom: 1px solid var(--line);
+}
+.page-story .story-headline{
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(40px, 7vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: var(--s-3) 0 var(--s-4);
+    text-transform: uppercase;
+}
+.page-story .story-lede{
+    max-width: 56ch;
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.5;
+    color: var(--grey-700);
+    margin: 0;
+}
+
+.page-story .story-body{
+    padding: clamp(40px, 7vw, 80px) 0;
+    border-bottom: 1px solid var(--line);
+}
+.page-story .story-cols{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 48px);
+}
+@media (min-width: 768px){
+    .page-story .story-cols{ grid-template-columns: 1fr 1fr; }
+}
+.page-story .story-col p{
+    font-size: 14px;
+    line-height: 1.6;
+    margin: var(--s-3) 0;
+}
+.page-story .story-col .quiet{ color: var(--grey-700); font-style: italic; }
+
+.page-story .story-timeline{
+    padding: clamp(48px, 8vw, 96px) 0;
+    border-bottom: 1px solid var(--line);
+}
+.page-story .story-timeline-head{
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(28px, 4.5vw, 48px);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    margin: var(--s-3) 0 var(--s-6);
+    text-transform: uppercase;
+}
+.page-story .timeline{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--ink);
+}
+.page-story .timeline li{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-2);
+    padding: var(--s-4) 0;
+    border-bottom: 1px solid var(--line);
+}
+@media (min-width: 640px){
+    .page-story .timeline li{
+        grid-template-columns: 160px 1fr;
+        gap: var(--s-5);
+        align-items: baseline;
+    }
+}
+.page-story .t-date{
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+}
+.page-story .t-tag{
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin-bottom: 4px;
+}
+.page-story .t-body p{
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    max-width: 58ch;
+}
+.page-story .story-credit{
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin-top: clamp(32px, 5vw, 56px);
+}
+
+.page-story .story-future{ padding: clamp(48px, 8vw, 96px) 0; }
+.page-story .story-future p{
+    max-width: 64ch;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--grey-700);
+}
+.page-story .story-cta{
+    display: flex;
+    gap: var(--s-3);
+    margin-top: var(--s-5);
+    flex-wrap: wrap;
+}
