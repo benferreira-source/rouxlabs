@@ -1644,6 +1644,75 @@ body.page-home .home-strip-links .sep{ color: var(--grey-500); }
    by colour at the top of the page; it shows them.
    ============================================================ */
 
+/* ============================================================
+   COLOURWAY GRID — the active /shop layout
+   --------------------------------------------------------------
+   Four hero tiles, one per colour, each a set-of-2 photo
+   deep-linked to /flexport.html with ?color=XX pre-selected.
+   Simple, photo-forward, no filter row, no variant matrix.
+   ============================================================ */
+.page-shop .shop-colors{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+}
+.page-shop .shop-color-card{
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    text-decoration: none;
+    color: inherit;
+    padding: clamp(24px, 3vw, 48px) clamp(20px, 2.4vw, 40px) clamp(24px, 3vw, 40px);
+    transition: background 220ms ease;
+}
+.page-shop .shop-color-card:hover{ background: var(--grey-100); }
+.page-shop .shop-color-card:focus-visible{
+    outline: 2px solid var(--rl-orange);
+    outline-offset: -3px;
+}
+.page-shop .shop-color-img{
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--paper);
+    margin-bottom: var(--s-3);
+}
+.page-shop .shop-color-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 420ms cubic-bezier(.2,.7,.2,1);
+}
+.page-shop .shop-color-card:hover .shop-color-img img{ transform: scale(1.03); }
+.page-shop .shop-color-meta{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid var(--ink);
+    padding-top: var(--s-3);
+}
+.page-shop .shop-color-name{
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+}
+.page-shop .shop-color-price{
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+}
+@media (max-width: 900px){
+    .page-shop .shop-colors{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px){
+    .page-shop .shop-colors{ grid-template-columns: 1fr; }
+}
+
 /* ---- Lookbook strip: shorter cousin of the home strip. ---- */
 .page-shop .shop-strip{
     display: flex;
