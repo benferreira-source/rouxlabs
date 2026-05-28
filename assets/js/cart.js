@@ -77,15 +77,12 @@
           + '</div>';
 
         if (isHome){
-            /* Supreme-style intro splash — huge centered logo, nav row beneath, cart pinned top-right. */
+            /* Supreme sliced-strip home: the giant logo + intro now live
+               in index.html's body. Header is just a tiny corner utility
+               (cart + hamburger). The mobile-nav drawer rides along so
+               the hamburger still works at phone widths. */
             header.innerHTML = ''
-              + '<div class="header-intro">'
-              +   utilityCorner
-              +   '<a class="brand brand-intro" href="index.html" aria-label="Roux Labs home">'
-              +     '<img class="brand-logo brand-logo-intro" src="assets/img/logo-roux.png" alt="Roux Labs">'
-              +   '</a>'
-              +   '<nav class="nav nav-intro hide-mobile" aria-label="Primary">' + navLinks + '</nav>'
-              + '</div>'
+              + utilityCorner
               + '<nav class="mobile-nav" data-mobile-nav aria-label="Mobile navigation">' + navLinks + '</nav>';
             return;
         }
@@ -279,10 +276,11 @@
     }
 
     function loadResponsivePolish(){
-        // Inject the two viewport-specific polish stylesheets on every
+        // Inject the viewport-specific polish stylesheets on every
         // page. They live after pages.css + the page-scoped polish files
-        // so their rules cascade cleanly.
-        ["polish-desktop", "polish-mobile"].forEach(function(name){
+        // so their rules cascade cleanly. polish-home is scoped to
+        // .page-home so it is inert on every other page.
+        ["polish-desktop", "polish-mobile", "polish-home"].forEach(function(name){
             if (document.querySelector('link[data-roux-' + name + ']')) return;
             var l = document.createElement("link");
             l.rel = "stylesheet";

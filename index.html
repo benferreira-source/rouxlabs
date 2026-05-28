@@ -31,11 +31,39 @@
 <header class="site-header" data-roux-header></header>
 
 <!-- ============================================================
-     PRODUCT GRID — the homepage IS the products.
-     Built explicitly (not from the catalog) so each FlexPort
-     colorway gets its own tile.
+     INTRO — centered logo + live NYC timestamp.
      ============================================================ -->
-<main class="home-grid" data-home-grid aria-label="Products"></main>
+<section class="home-intro">
+    <a class="home-intro-brand" href="index.html" aria-label="Roux Labs home">
+        <img src="assets/img/logo-roux.png" alt="Roux Labs">
+    </a>
+    <div class="home-intro-stamp mono" data-home-timestamp></div>
+</section>
+
+<!-- ============================================================
+     SLICED STRIP — tall narrow slices of product photography,
+     edge-to-edge across the viewport. Populated by JS below so
+     image sources / object-positions stay editable in one array.
+     ============================================================ -->
+<nav class="home-strip" data-home-strip aria-label="Featured"></nav>
+
+<!-- Small mono link row beneath the strip — Supreme-style.
+     We deliberately omit lookbook / news because those pages
+     don't exist yet. -->
+<nav class="home-strip-links mono" aria-label="Browse">
+    <div class="left">
+        <a href="shop.html">shop</a>
+        <span class="sep">·</span>
+        <a href="shop.html">view all</a>
+    </div>
+    <div class="right">
+        <a href="flexport.html">flexport zero-u</a>
+        <span class="sep">·</span>
+        <a href="about.html">grey space</a>
+        <span class="sep">·</span>
+        <a href="support.html">support</a>
+    </div>
+</nav>
 
 <footer class="site-footer" data-roux-footer></footer>
 
@@ -45,71 +73,62 @@
 <script src="assets/js/products.js"></script>
 <script src="assets/js/cart.js"></script>
 <script>
-/* Render the Supreme-style homepage tile grid.
-   One tile per FlexPort colorway (4) + one per accessory (2). */
 (function(){
-    const grid = document.querySelector("[data-home-grid]");
-    if (!grid) return;
-
-    const flexport = window.ROUX.findProduct("flexport-zero-u");
-    const strap    = window.ROUX.findProduct("roux-strap");
-    const labels   = window.ROUX.findProduct("label-pack");
-    if (!flexport || !strap || !labels) return;
-
-    const tiles = [];
-
-    /* Build a tile's image markup. Default = set-of-2 photo so each
-       tile reads as cleanly as Supreme's single-product thumbnails;
-       hover reveals the set-of-12 photo, silently telling the visitor
-       "sold in sets" without a word of copy. */
-    function flexportImageStack(colorKey, label){
-        var base = window.ROUX.productSvg(flexport.id, colorKey, 2);
-        var hover = window.ROUX.productSvg(flexport.id, colorKey, 12)
-            .replace(/<img /, '<img class="home-tile-hover" ');
-        // Tag the base so CSS can target it specifically.
-        base = base.replace(/<img /, '<img class="home-tile-base" ');
-        return '<div class="home-tile-stack">' + base + hover + '</div>';
+    /* ---------- NYC timestamp ---------- */
+    var stamp = document.querySelector("[data-home-timestamp]");
+    if (stamp){
+        var parts = new Intl.DateTimeFormat("en-US", {
+            timeZone: "America/New_York",
+            year: "numeric", month: "2-digit", day: "2-digit",
+            hour: "2-digit", minute: "2-digit", hour12: true
+        }).formatToParts(new Date());
+        function p(t){
+            var x = parts.find(function(o){ return o.type === t; });
+            return x ? x.value : "";
+        }
+        stamp.textContent = p("month") + "/" + p("day") + "/" + p("year")
+            + " " + p("hour") + ":" + p("minute")
+            + (p("dayPeriod") || "").toLowerCase() + " NYC";
     }
 
-    /* One tile per FlexPort colorway */
-    (flexport.colors || []).forEach(function(c){
-        tiles.push({
-            href:    "flexport.html?color=" + c.key,
-            image:   flexportImageStack(c.key, c.label),
-            name:    "FlexPort " + c.label,
-            price:   flexport.priceFrom,
-            colors:  flexport.colors,
-            activeKey: c.key
-        });
-    });
+    /* ---------- Sliced strip ----------
+       Each entry frames a different focal point of a real product
+       photo (or rack-context shot) via object-position. Repeated
+       source images use different positions so they read as
+       independent crops. Tag is optional. */
+    var SLICES = [
+        { src: "assets/img/products/flexport-bk-12.jpg", pos: "18% 50%", href: "flexport.html?color=BK", tag: "new" },
+        { src: "assets/img/products/flexport-bk-12.jpg", pos: "62% 50%", href: "flexport.html?color=BK" },
+        { src: "assets/img/products/flexport-rk-04.jpg", pos: "30% 50%", href: "flexport.html?color=RK", tag: "new" },
+        { src: "assets/img/install-rack-closeup.jpg",    pos: "40% 50%", href: "flexport.html",         tag: "rack" },
+        { src: "assets/img/products/flexport-wk-04.jpg", pos: "28% 50%", href: "flexport.html?color=WK", tag: "new" },
+        { src: "assets/img/products/flexport-wk-08.jpg", pos: "70% 50%", href: "flexport.html?color=WK" },
+        { src: "assets/img/install-flexport-detail.jpg", pos: "30% 50%", href: "flexport.html",         tag: "install" },
+        { src: "assets/img/install-flexport-detail.jpg", pos: "72% 50%", href: "flexport.html" },
+        { src: "assets/img/products/flexport-ok-12.jpg", pos: "22% 50%", href: "flexport.html?color=OK", tag: "new" },
+        { src: "assets/img/products/flexport-ok-12.jpg", pos: "66% 50%", href: "flexport.html?color=OK" },
+        { src: "assets/img/install-rack-full.jpg",       pos: "32% 50%", href: "about.html",            tag: "rack" },
+        { src: "assets/img/install-rack-full.jpg",       pos: "56% 50%", href: "about.html" },
+        { src: "assets/img/install-rack-full.jpg",       pos: "78% 50%", href: "about.html" },
+        { src: "assets/img/products/flexport-rk-12.jpg", pos: "42% 50%", href: "flexport.html?color=RK", tag: "new" },
+        { src: "assets/img/products/flexport-bk-04.jpg", pos: "50% 50%", href: "flexport.html?color=BK" },
+        { src: "assets/img/install-rack-closeup.jpg",    pos: "76% 50%", href: "flexport.html" }
+    ];
 
-    /* Accessories — one tile each (no hover swap, single image) */
-    [strap, labels].forEach(function(p){
-        tiles.push({
-            href:    "product.html?id=" + p.id,
-            image:   window.ROUX.productSvg(p.id, (p.colors[0]||{}).key),
-            name:    p.name,
-            price:   p.priceFrom,
-            colors:  p.colors,
-            activeKey: (p.colors[0]||{}).key
-        });
-    });
-
-    grid.innerHTML = tiles.map(function(t){
-        const swatches = (t.colors || []).map(function(c){
-            const active = c.key === t.activeKey ? " is-active" : "";
-            return '<span class="swatch ' + c.swatchClass + active + '" title="' + c.label + '"></span>';
+    var strip = document.querySelector("[data-home-strip]");
+    if (strip){
+        strip.innerHTML = SLICES.map(function(s){
+            var style = "background-image:url('" + s.src + "');"
+                      + "background-position:" + s.pos + ";";
+            var tag = s.tag
+                ? '<span class="home-slice-tag mono">' + s.tag + '</span>'
+                : '';
+            return '<a class="home-slice" href="' + s.href + '" aria-label="View product">'
+                +   '<div class="home-slice-img" style="' + style + '"></div>'
+                +   tag
+                + '</a>';
         }).join("");
-        return ''
-          + '<a class="home-tile" href="' + t.href + '">'
-          +   '<div class="home-tile-image">' + t.image + '</div>'
-          +   '<div class="home-tile-meta">'
-          +     '<span class="home-tile-name">' + t.name + '</span>'
-          +     '<span class="home-tile-price">' + window.ROUX.formatPrice(t.price) + '</span>'
-          +     '<span class="home-tile-swatches">' + swatches + '</span>'
-          +   '</div>'
-          + '</a>';
-    }).join("");
+    }
 })();
 </script>
 </body>
