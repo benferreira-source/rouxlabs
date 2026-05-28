@@ -262,7 +262,7 @@
     function loadSupportChat(){
         if (document.querySelector('script[data-roux-chat]')) return;
         var s = document.createElement("script");
-        s.src = "assets/js/chat.js";
+        s.src = "assets/js/chat.js?v=2";
         s.defer = true;
         s.setAttribute("data-roux-chat", "");
         document.body.appendChild(s);
@@ -271,7 +271,7 @@
     function loadNewsletter(){
         if (document.querySelector('script[data-roux-newsletter]')) return;
         var s = document.createElement("script");
-        s.src = "assets/js/newsletter.js";
+        s.src = "assets/js/newsletter.js?v=2";
         s.defer = true;
         s.setAttribute("data-roux-newsletter", "");
         document.body.appendChild(s);
@@ -286,7 +286,7 @@
             if (document.querySelector('link[data-roux-' + name + ']')) return;
             var l = document.createElement("link");
             l.rel = "stylesheet";
-            l.href = "assets/css/" + name + ".css";
+            l.href = "assets/css/" + name + ".css?v=2";
             l.setAttribute("data-roux-" + name, "");
             document.head.appendChild(l);
         });

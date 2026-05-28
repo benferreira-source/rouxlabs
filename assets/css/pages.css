@@ -1403,3 +1403,103 @@ body.page-story{ background: var(--paper); color: var(--ink); }
     margin-top: var(--s-5);
     flex-wrap: wrap;
 }
+
+
+/* ============================================================
+   HOME (Supreme sliced-strip) — defensive copy of the rules in
+   polish-home.css. pages.css is loaded synchronously via a static
+   <link>, so even if polish-home.css fails or is held in a stale
+   browser cache the strip still renders correctly.
+   ============================================================ */
+body.page-home .home-intro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--s-3);
+    padding: clamp(48px, 8vw, 120px) var(--gutter) clamp(32px, 5vw, 80px);
+    text-align: center;
+}
+body.page-home .home-intro-brand img{
+    height: clamp(80px, 12vw, 160px);
+    width: auto;
+}
+body.page-home .home-intro-stamp{
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--grey-700);
+    text-transform: lowercase;
+}
+body.page-home .home-strip{
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+body.page-home .home-slice{
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 6;
+    min-width: 70px;
+    background: var(--paper);
+    overflow: hidden;
+    scroll-snap-align: start;
+    text-decoration: none;
+}
+body.page-home .home-slice-img{
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 320ms ease;
+}
+body.page-home .home-slice:hover .home-slice-img{ transform: scale(1.04); }
+body.page-home .home-slice-tag{
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--f-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: lowercase;
+    padding: 2px 5px;
+    border: 1px solid var(--ink);
+    z-index: 2;
+}
+body.page-home .home-strip-links{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--s-3);
+    padding: var(--s-5) var(--gutter);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--ink);
+}
+body.page-home .home-strip-links a{
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+body.page-home .home-strip-links .left,
+body.page-home .home-strip-links .right{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+body.page-home .home-strip-links .sep{ color: var(--grey-500); }
+
+@media (max-width: 720px){
+    body.page-home .home-strip{ grid-template-columns: repeat(8, minmax(80px, 1fr)); }
+    body.page-home .home-strip-links{ flex-direction: column; gap: 8px; }
+}
