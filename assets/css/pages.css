@@ -1887,3 +1887,88 @@ body.page-home .home-strip-links .sep{ color: var(--grey-500); }
     text-transform: uppercase;
     color: var(--grey-700);
 }
+
+
+/* ============================================================
+   MOTION — engineering-flavoured reveals
+   --------------------------------------------------------------
+   Sectional fade-up: 12px translate + opacity, 480ms ease-out.
+   Once per element. Disabled under prefers-reduced-motion via
+   the html.motion-reduce escape hatch set by motion.js.
+
+   Timeline ticker: the .t-date span uses a tabular-nums font
+   variant so digits don't shift width while cycling.
+   ============================================================ */
+.reveal-pending{
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 480ms cubic-bezier(.2,.7,.2,1), transform 480ms cubic-bezier(.2,.7,.2,1);
+    will-change: opacity, transform;
+}
+.reveal-pending.reveal-in{
+    opacity: 1;
+    transform: none;
+}
+html.motion-reduce .reveal-pending{
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+/* Timeline date counter — tabular numbers so digit-cycling
+   doesn't bounce the line width as the ticker runs. */
+.page-story .t-date-ticker{
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+}
+
+
+/* ============================================================
+   LOGO PLOTTER INTRO — first visit per session
+   --------------------------------------------------------------
+   On the home page, the centered logo reveals via a horizontal
+   clip-path sweep (like a CAD pen plotter moving left → right
+   across the page). The wordmark "draws" in ~1.4s, then locks.
+   A faint orange ruler line trails the sweep, fades after.
+   Skips entirely on repeat visits (sessionStorage flag), and on
+   prefers-reduced-motion.
+   ============================================================ */
+body.page-home .home-intro-brand{
+    position: relative;
+}
+body.page-home .home-intro-brand img{
+    /* Initial state: hidden via clip-path. JS adds .plot-go to
+       trigger the sweep. If JS doesn't run, the logo just shows. */
+}
+body.page-home .home-intro-brand.plot-pending img{
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1400ms cubic-bezier(.35,.7,.25,1);
+}
+body.page-home .home-intro-brand.plot-go img{
+    clip-path: inset(0 0 0 0);
+}
+/* The plotter pen — a thin safety-orange vertical line that
+   tracks the right edge of the visible clip. CSS-only via a
+   second pseudo-element on the brand link. */
+body.page-home .home-intro-brand.plot-pending::after{
+    content: "";
+    position: absolute;
+    top: -6%;
+    bottom: -6%;
+    left: 0;
+    width: 1.5px;
+    background: var(--rl-orange);
+    transform: translateX(0);
+    transition: transform 1400ms cubic-bezier(.35,.7,.25,1), opacity 280ms ease 1300ms;
+    box-shadow: 0 0 6px rgba(255,77,0,.4);
+    pointer-events: none;
+}
+body.page-home .home-intro-brand.plot-go::after{
+    transform: translateX(100%);
+    opacity: 0;
+}
+html.motion-reduce body.page-home .home-intro-brand.plot-pending img,
+html.motion-reduce body.page-home .home-intro-brand.plot-pending::after{
+    transition: none;
+    clip-path: none;
+    opacity: 0;
+}

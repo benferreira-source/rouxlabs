@@ -23,8 +23,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=7">
-<link rel="stylesheet" href="assets/css/pages.css?v=7">
+<link rel="stylesheet" href="assets/css/base.css?v=9">
+<link rel="stylesheet" href="assets/css/pages.css?v=9">
 </head>
 <body class="page-home">
 
@@ -79,10 +79,29 @@
 <!-- ============================================================
      Scripts
      ============================================================ -->
-<script src="assets/js/products.js?v=7"></script>
-<script src="assets/js/cart.js?v=7"></script>
+<script src="assets/js/products.js?v=9"></script>
+<script src="assets/js/cart.js?v=9"></script>
+<script src="assets/js/motion.js?v=9" defer></script>
 <script>
 (function(){
+    /* ---------- Logo plotter intro (first session-visit only) ----------
+       Reveals the centered logo via a horizontal clip-path sweep with
+       a thin safety-orange "pen" trailing the right edge. Skips on
+       repeat visits and on prefers-reduced-motion. */
+    var brand = document.querySelector(".home-intro-brand");
+    if (brand){
+        var seen = false;
+        try { seen = sessionStorage.getItem("roux:plot:seen") === "1"; } catch(_){}
+        var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!seen && !reduced){
+            brand.classList.add("plot-pending");
+            requestAnimationFrame(function(){
+                requestAnimationFrame(function(){ brand.classList.add("plot-go"); });
+            });
+            try { sessionStorage.setItem("roux:plot:seen", "1"); } catch(_){}
+        }
+    }
+
     /* ---------- MSP timestamp ----------
        Brand is Made in MN/USA — Minneapolis-St. Paul is the home city,
        so the brand timestamp matches the city code and uses Central time. */

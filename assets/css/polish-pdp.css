@@ -440,3 +440,86 @@ html.caliper-active [data-caliper]{ cursor: none; }
     .caliper-hint::after{ content: " · tap, tap"; }
 }
 
+
+/* ============================================================
+   GALLERY VIEW TOGGLE — Photo ↔ Spec
+   --------------------------------------------------------------
+   Pairs with the Caliper Cursor. Users measure the photo, then
+   toggle to the technical drawing to see the patent's real
+   dimensions called out in safety-orange. The crossfade is
+   short (240ms) so the moment reads as a CAD viewport flip,
+   not a slideshow.
+   ============================================================ */
+body.page-pdp .pdp-view-toggle{
+    display: inline-flex;
+    margin: 0 0 var(--s-3);
+    border: 1px solid var(--ink);
+    overflow: hidden;
+    align-self: flex-start;
+}
+body.page-pdp .pdp-view-toggle button{
+    padding: 6px 14px;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: var(--paper);
+    color: var(--ink);
+    border: 0;
+    cursor: pointer;
+    transition: background 160ms ease, color 160ms ease;
+}
+body.page-pdp .pdp-view-toggle button + button{
+    border-left: 1px solid var(--ink);
+}
+body.page-pdp .pdp-view-toggle button.is-active{
+    background: var(--ink);
+    color: var(--paper);
+}
+body.page-pdp .pdp-view-toggle button:focus-visible{
+    outline: 2px solid var(--rl-orange);
+    outline-offset: -3px;
+}
+
+/* The gallery frame holds the photo + spec SVG as stacked layers
+   and crossfades them based on data-pdp-view on .pdp-gallery. */
+body.page-pdp .pdp-gallery-frame{
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+body.page-pdp .pdp-gallery-frame > .hero-shot{
+    position: absolute;
+    inset: 0;
+    border: 0;
+    flex: none;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 240ms ease;
+}
+body.page-pdp .pdp-gallery-frame > .hero-shot img{
+    max-width: 86%;
+    max-height: 86%;
+}
+body.page-pdp .pdp-spec-diagram{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 240ms ease;
+    pointer-events: none;
+}
+body.page-pdp .pdp-gallery[data-pdp-view="spec"] .hero-shot{
+    opacity: 0;
+    pointer-events: none;
+}
+body.page-pdp .pdp-gallery[data-pdp-view="spec"] .pdp-spec-diagram{
+    opacity: 1;
+    pointer-events: auto;
+}
+

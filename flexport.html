@@ -23,9 +23,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=7">
-<link rel="stylesheet" href="assets/css/pages.css?v=7">
-<link rel="stylesheet" href="assets/css/polish-pdp.css?v=7">
+<link rel="stylesheet" href="assets/css/base.css?v=9">
+<link rel="stylesheet" href="assets/css/pages.css?v=9">
+<link rel="stylesheet" href="assets/css/polish-pdp.css?v=9">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -72,8 +72,87 @@
 </div>
 
 <section class="pdp">
-  <div class="pdp-gallery">
-    <div class="hero-shot" data-pdp-hero></div>
+  <div class="pdp-gallery" data-pdp-view="photo">
+    <!-- Photo / Spec toggle. Pairs with the Caliper Cursor: you can
+         measure the photo, then read the patent dimensions on the spec. -->
+    <div class="pdp-view-toggle mono" role="tablist" aria-label="Gallery view">
+      <button type="button" data-pdp-view-btn="photo" class="is-active" role="tab" aria-selected="true">Photo</button>
+      <button type="button" data-pdp-view-btn="spec" role="tab" aria-selected="false">Spec</button>
+    </div>
+    <div class="pdp-gallery-frame">
+      <div class="hero-shot" data-pdp-hero></div>
+      <!-- Patent-grade technical drawing. Real dimensions from the
+           FlexPort patent: 19" rack width, 44.45mm (1U) panel height,
+           21.34mm port pitch, 8.0mm snap-fit tab. Crossfades with the
+           photo when the user toggles 'Spec'. -->
+      <svg class="pdp-spec-diagram" viewBox="0 0 1500 1500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <pattern id="rouxRuler" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#eef0f1" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="1500" height="1500" fill="url(#rouxRuler)"/>
+
+        <!-- Title block — engineering drawing corner -->
+        <g font-family="JetBrains Mono, monospace" fill="#222">
+          <text x="60"  y="92"  font-size="22" letter-spacing="3">FP · ZERO-U PANEL</text>
+          <text x="60"  y="120" font-size="11" letter-spacing="2" fill="#707070">PATENTED GEOMETRY · MADE IN USA</text>
+        </g>
+
+        <!-- Centered panel front view: rectangle + 8 port openings + 4 snap-fit tabs -->
+        <g stroke="#000" stroke-width="2.5" fill="none">
+          <rect x="150" y="660" width="1200" height="180" rx="3"/>
+          <!-- 8 port openings, evenly spaced -->
+          <rect x="195" y="705" width="105" height="90" rx="2"/>
+          <rect x="335" y="705" width="105" height="90" rx="2"/>
+          <rect x="475" y="705" width="105" height="90" rx="2"/>
+          <rect x="615" y="705" width="105" height="90" rx="2"/>
+          <rect x="755" y="705" width="105" height="90" rx="2"/>
+          <rect x="895" y="705" width="105" height="90" rx="2"/>
+          <rect x="1035" y="705" width="105" height="90" rx="2"/>
+          <rect x="1175" y="705" width="105" height="90" rx="2"/>
+          <!-- Snap-fit mount tabs (bottom edge, 4 along) -->
+          <path d="M 160 840 L 160 880 L 220 880 L 220 840"/>
+          <path d="M 530 840 L 530 880 L 590 880 L 590 840"/>
+          <path d="M 910 840 L 910 880 L 970 880 L 970 840"/>
+          <path d="M 1280 840 L 1280 880 L 1340 880 L 1340 840"/>
+        </g>
+
+        <!-- Dimension callouts in safety-orange — the spec story -->
+        <g stroke="#ff4d00" stroke-width="1.4" fill="none">
+          <!-- Height = 44.45mm (vertical, right side) -->
+          <line x1="1410" y1="660" x2="1410" y2="840" stroke-dasharray="4 4"/>
+          <line x1="1395" y1="660" x2="1425" y2="660"/>
+          <line x1="1395" y1="840" x2="1425" y2="840"/>
+          <!-- Port pitch = 21.34mm (between port 1 and port 2 centers) -->
+          <line x1="247" y1="930" x2="387" y2="930"/>
+          <line x1="247" y1="918" x2="247" y2="942"/>
+          <line x1="387" y1="918" x2="387" y2="942"/>
+          <!-- Snap-fit tab callout leader -->
+          <line x1="190" y1="860" x2="290" y2="990" stroke-dasharray="3 3"/>
+          <!-- Width = 482.6mm (full panel, below the bottom dim line) -->
+          <line x1="150" y1="1050" x2="1350" y2="1050"/>
+          <line x1="150" y1="1038" x2="150" y2="1062"/>
+          <line x1="1350" y1="1038" x2="1350" y2="1062"/>
+        </g>
+
+        <!-- Dimension labels (orange mono) -->
+        <g font-family="JetBrains Mono, monospace" fill="#ff4d00" font-size="20" letter-spacing="2" font-weight="500">
+          <text x="1445" y="757">44.45 mm</text>
+          <text x="265" y="970">21.34 mm</text>
+          <text x="295" y="1000" font-size="14" fill="#222">SNAP-FIT TAB · 8.0 mm</text>
+          <text x="675" y="1080" font-size="14" text-anchor="middle">482.6 mm · 19" RACK STANDARD</text>
+        </g>
+
+        <!-- Bottom title-block stripe -->
+        <g font-family="JetBrains Mono, monospace" fill="#707070" font-size="11" letter-spacing="3">
+          <line x1="60" y1="1400" x2="1440" y2="1400" stroke="#e6e6e6" stroke-width="1"/>
+          <text x="60"   y="1430">DRAWING · NTS</text>
+          <text x="750"  y="1430" text-anchor="middle">FP-PANEL-A · REV 2.1</text>
+          <text x="1440" y="1430" text-anchor="end">ROUX LABS · 2026.05</text>
+        </g>
+      </svg>
+    </div>
     <div class="pdp-thumbs" data-pdp-thumbs></div>
   </div>
 
@@ -140,9 +219,9 @@
 </main>
 <footer class="site-footer" data-roux-footer></footer>
 
-<script src="assets/js/products.js?v=7"></script>
-<script src="assets/js/cart.js?v=7"></script>
-<script src="assets/js/caliper.js?v=7" defer></script>
+<script src="assets/js/products.js?v=9"></script>
+<script src="assets/js/cart.js?v=9"></script>
+<script src="assets/js/caliper.js?v=9" defer></script>
 <script>
 (function(){
     const PRODUCT = window.ROUX.findProduct("flexport-zero-u");
@@ -233,6 +312,19 @@
         const s = e.target.closest("[data-set-size]");    if (s){ state.set = parseInt(s.getAttribute("data-set-size"),10); render(); }
         if (e.target.closest("[data-qty-inc]")){ state.qty = Math.min(99, state.qty + 1); render(); }
         if (e.target.closest("[data-qty-dec]")){ state.qty = Math.max(1, state.qty - 1); render(); }
+        // Gallery view toggle: Photo ↔ Spec
+        const vbtn = e.target.closest("[data-pdp-view-btn]");
+        if (vbtn){
+            const view = vbtn.getAttribute("data-pdp-view-btn");
+            const gallery = document.querySelector(".pdp-gallery");
+            if (gallery) gallery.setAttribute("data-pdp-view", view);
+            document.querySelectorAll("[data-pdp-view-btn]").forEach(function(b){
+                const isActive = b === vbtn;
+                b.classList.toggle("is-active", isActive);
+                b.setAttribute("aria-selected", isActive ? "true" : "false");
+            });
+            return;
+        }
         if (e.target.closest("[data-pdp-add]")){
             const set = PRODUCT.sets.find(function(x){ return x.size === state.set; });
             const colorMeta = PRODUCT.colors.find(function(x){ return x.key === state.color; });

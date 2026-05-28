@@ -23,8 +23,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=8">
-<link rel="stylesheet" href="assets/css/pages.css?v=8">
+<link rel="stylesheet" href="assets/css/base.css?v=9">
+<link rel="stylesheet" href="assets/css/pages.css?v=9">
 </head>
 <body class="page-shop">
 <header class="site-header" data-roux-header></header>
@@ -75,11 +75,11 @@
   </div>
   <div class="shop-field">
     <figure class="shop-field-tile">
-      <img src="assets/img/install-rack-closeup.jpg?v=8" alt="FlexPort installed on a populated rack — close detail." loading="lazy" width="1500" height="1000">
+      <img src="assets/img/install-rack-closeup.jpg?v=9" alt="FlexPort installed on a populated rack — close detail." loading="lazy" width="1500" height="1000">
       <figcaption class="mono">Datastrait · MN · 2026.04</figcaption>
     </figure>
     <figure class="shop-field-tile">
-      <img src="assets/img/install-flexport-detail.jpg?v=8" alt="FlexPort detail — mount, jack, cable exit." loading="lazy" width="1500" height="1000">
+      <img src="assets/img/install-flexport-detail.jpg?v=9" alt="FlexPort detail — mount, jack, cable exit." loading="lazy" width="1500" height="1000">
       <figcaption class="mono">Off-rail · cable exit · 2026.04</figcaption>
     </figure>
   </div>
@@ -92,8 +92,8 @@
 </main>
 
 <footer class="site-footer" data-roux-footer></footer>
-<script src="assets/js/products.js?v=8"></script>
-<script src="assets/js/cart.js?v=8"></script>
+<script src="assets/js/products.js?v=9"></script>
+<script src="assets/js/cart.js?v=9"></script>
 <script>
 (function(){
     /* ---------- Lookbook strip ----------
@@ -119,7 +119,7 @@
         stripEl.innerHTML = STRIP.map(function(s, i){
             var eager = i < 4;
             return '<div class="shop-strip-cell">'
-                +    '<img src="' + s.src + '?v=8" alt="" '
+                +    '<img src="' + s.src + '?v=9" alt="" '
                 +    'loading="' + (eager ? "eager" : "lazy") + '" decoding="async" '
                 +    (eager ? 'fetchpriority="high" ' : '')
                 +    'style="object-position:' + s.pos + '">'
@@ -157,7 +157,7 @@
         gridEl.innerHTML = pieces.map(function(p, i){
             if (p.type === "interlude"){
                 return '<a class="shop-grid-interlude" href="flexport.html" aria-label="See FlexPort installed">'
-                    +    '<img src="assets/img/install-rack-full.jpg?v=8" alt="FlexPort populated across a full rack." loading="lazy" width="2000" height="800" style="object-position:50% 40%">'
+                    +    '<img src="assets/img/install-rack-full.jpg?v=9" alt="FlexPort populated across a full rack." loading="lazy" width="2000" height="800" style="object-position:50% 40%">'
                     +    '<div class="shop-grid-interlude-cap mono">'
                     +      '<span>In Situ · 24 Racks · Datastrait MN</span>'
                     +      '<span aria-hidden="true">↗</span>'
@@ -173,7 +173,7 @@
             return rowLabel
                 + '<a class="shop-tile" href="' + href + '" aria-label="' + colorLabel + ' · set of ' + p.size + '">'
                 +   '<div class="shop-tile-img">'
-                +     '<img src="' + flexportImg(p.color, p.size) + '?v=8" alt="FlexPort ' + colorLabel + ', set of ' + p.size + '" '
+                +     '<img src="' + flexportImg(p.color, p.size) + '?v=9" alt="FlexPort ' + colorLabel + ', set of ' + p.size + '" '
                 +     'loading="' + (i < 6 ? "eager" : "lazy") + '" decoding="async" width="1500" height="1500">'
                 +   '</div>'
                 +   '<div class="shop-tile-meta mono">'
