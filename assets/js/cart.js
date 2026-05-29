@@ -262,7 +262,7 @@
     function loadSupportChat(){
         if (document.querySelector('script[data-roux-chat]')) return;
         var s = document.createElement("script");
-        s.src = "assets/js/chat.js?v=10";
+        s.src = "assets/js/chat.js?v=11";
         s.defer = true;
         s.setAttribute("data-roux-chat", "");
         document.body.appendChild(s);
@@ -271,7 +271,7 @@
     function loadNewsletter(){
         if (document.querySelector('script[data-roux-newsletter]')) return;
         var s = document.createElement("script");
-        s.src = "assets/js/newsletter.js?v=10";
+        s.src = "assets/js/newsletter.js?v=11";
         s.defer = true;
         s.setAttribute("data-roux-newsletter", "");
         document.body.appendChild(s);
@@ -282,7 +282,7 @@
         // timeline date-ticker. Skips itself under reduced-motion.
         if (document.querySelector('script[data-roux-motion]')) return;
         var s = document.createElement("script");
-        s.src = "assets/js/motion.js?v=10";
+        s.src = "assets/js/motion.js?v=11";
         s.defer = true;
         s.setAttribute("data-roux-motion", "");
         document.body.appendChild(s);
@@ -297,7 +297,7 @@
             if (document.querySelector('link[data-roux-' + name + ']')) return;
             var l = document.createElement("link");
             l.rel = "stylesheet";
-            l.href = "assets/css/" + name + ".css?v=10";
+            l.href = "assets/css/" + name + ".css?v=11";
             l.setAttribute("data-roux-" + name, "");
             document.head.appendChild(l);
         });

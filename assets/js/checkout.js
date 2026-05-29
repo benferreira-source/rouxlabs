@@ -47,7 +47,7 @@
               +   '<p style="color:var(--grey-700);max-width:48ch">Pick a colorway and a set size on the FlexPort page — Black, White, Orange, Red. Sets from $39.95. Free shipping over $150, ships in 3 business days.</p>'
               +   '<div class="checkout-empty-card">'
               +     '<a class="checkout-empty-thumb" href="flexport.html" aria-label="Shop FlexPort">'
-              +       '<img src="assets/img/products/flexport-bk-04.jpg?v=7" alt="FlexPort Zero-U panel, set of 4, black" loading="eager" width="240" height="240">'
+              +       '<img src="assets/img/products/flexport-bk-04.jpg?v=11" alt="FlexPort Zero-U panel, set of 4, black" loading="eager" width="240" height="240">'
               +     '</a>'
               +     '<div class="checkout-empty-meta">'
               +       '<div class="checkout-empty-name">FlexPort Zero-U Panel</div>'

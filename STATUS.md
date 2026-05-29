@@ -19,7 +19,8 @@ This is the load-bearing recent context — read this first.
 - **Color contrast** — `--grey-500` darkened from `#909090` → `#707070` (AA on white); `.btn-orange` text changed from `var(--paper)` → `var(--ink)` so black-on-orange passes AAA. Brand orange unchanged.
 - **Editorial checkout empty state** — `assets/js/checkout.js` renders a FlexPort thumb + `SHOP FLEXPORT →` card instead of the cold "your cart is empty" dead-end.
 - **A11y baseline** — every page has `<main>` and an `<h1>` (visually-hidden via `.sr-only` on pages whose visual masthead is a logo). Chat FAB's idle orange notification dot was removed (was leaking the safety-orange into every page).
-- **Repo hygiene** — 13MB of orphan PNG masters + 2 screenshots `git rm`'d. Cache-bust query strings unified to `?v=10` across HTML + cart.js dynamic loads.
+- **Repo hygiene** — 13MB of orphan PNG masters + 2 screenshots `git rm`'d. Cache-bust query strings unified to `?v=11` across HTML + cart.js + checkout.js dynamic loads.
+- **Mobile pass (2026-05-28)** — Caliper is now pointer-only (`(hover: none), (pointer: coarse)` gate) so it no longer traps page scroll on touch, and is scoped to the hero photo only (no longer leaks onto swatch thumbnails / cart rows / checkout cards). `motion.js` reveal now feature-detects `IntersectionObserver` and has safety-net timers (1.2s sections, 1.5s timeline) so content can never strand invisible. Tap targets: PDP Photo/Spec toggle and chat-close now meet the 44px minimum.
 
 ## What's NOT done (launch blockers)
 
@@ -47,10 +48,10 @@ This is the load-bearing recent context — read this first.
 - **NEVER `git add -A` or `git add .`** — `DEMO_BRIEF.md` is in `.gitignore` now, but other untracked files can sneak in. Stage by name: `git add story.html assets/css/pages.css ...`.
 - **Auto-mode classifier blocks bare `git push origin main`.** Workflow: split commit and push into separate calls; if push gets blocked, surface to the user and they can run `! git push origin main` in their prompt (executes in the session).
 - **macOS sometimes locks individual files** — usually a VM, Spotlight indexer, or editor inside another app holds an exclusive read lock. Symptom: `cat /path/to/file` returns `Operation not permitted` even though `ls -la` shows correct perms. Fix: ask the user to close whatever's holding it; poll with `until head -1 /path >/dev/null 2>&1; do sleep 2; done`. Worst case, the entire `.git/` directory becomes TCC-locked after rapid file edits — at that point only the user can recover (Settings → Privacy & Security → Full Disk Access for Terminal/Claude).
-- **Cache-bust version is `?v=10`** as of this writing. When you change CSS/JS, bump to `?v=11` site-wide:
+- **Cache-bust version is `?v=11`** as of this writing. When you change CSS/JS, bump to `?v=12` site-wide:
   ```
-  for f in *.html; do sed -i '' -E 's|\?v=[0-9]+|?v=11|g' "$f"; done
-  sed -i '' -E 's|\?v=[0-9]+|?v=11|g' assets/js/cart.js
+  for f in *.html; do sed -i '' -E 's|\?v=[0-9]+|?v=12|g' "$f"; done
+  sed -i '' -E 's|\?v=[0-9]+|?v=12|g' assets/js/cart.js assets/js/checkout.js
   ```
   Vercel sets `Cache-Control: immutable, max-age=31536000` on `/assets/*`, so without a bump, browsers hold stale assets for a year.
 - **Assets that load dynamically:** `cart.js` injects `chat.js`, `newsletter.js`, `motion.js`, and `polish-{desktop,mobile,home}.css` on every page. Bump THOSE versions in `cart.js` too when you cache-bust.
@@ -77,4 +78,4 @@ This is the load-bearing recent context — read this first.
 - News / lookbook page.
 - Real wholesale page for MSP outreach.
 
-— Last touched 2026-05-28.
+— Last touched 2026-05-28 (mobile scroll fix + mobile enhancement pass).

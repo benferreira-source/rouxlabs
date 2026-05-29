@@ -5,7 +5,7 @@ import http.server
 import os
 import sys
 
-PORT = 4321
+PORT = int(os.environ.get("PORT", 4321))
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 

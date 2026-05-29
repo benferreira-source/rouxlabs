@@ -41,18 +41,32 @@
         if (revealTargets.indexOf(el) === -1) revealTargets.push(el);
     });
 
-    // Prepare initial state via a class — CSS handles transition.
-    revealTargets.forEach(function(el){ el.classList.add("reveal-pending"); });
+    function revealAll(){
+        revealTargets.forEach(function(el){ el.classList.add("reveal-in"); });
+    }
 
-    var revealObs = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("reveal-in");
-            revealObs.unobserve(entry.target);
-        });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    // No IntersectionObserver (old browser) → never hide; show everything.
+    if (!("IntersectionObserver" in window)){
+        revealAll();
+    } else {
+        // Prepare initial state via a class — CSS handles transition.
+        revealTargets.forEach(function(el){ el.classList.add("reveal-pending"); });
 
-    revealTargets.forEach(function(el){ revealObs.observe(el); });
+        var revealObs = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("reveal-in");
+                revealObs.unobserve(entry.target);
+            });
+        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+
+        revealTargets.forEach(function(el){ revealObs.observe(el); });
+
+        // Safety net: content must never get stranded invisible. If the
+        // observer hasn't revealed an element within 1.2s (callback never
+        // fired, transition stalled in a backgrounded tab, etc.), force it.
+        setTimeout(revealAll, 1200);
+    }
 
     /* ----- 2. Timeline date ticker --------------------------
        For each timeline <li>: when it intersects the viewport,
@@ -60,7 +74,7 @@
        leading "2026." is constant so we only animate MM and DD.
     */
     var timeline = document.querySelector(".timeline");
-    if (!timeline) return;
+    if (!timeline || !("IntersectionObserver" in window)) return;
 
     var rows = timeline.querySelectorAll("li");
     rows.forEach(function(li){
@@ -113,4 +127,14 @@
         });
     }, { rootMargin: "0px 0px -10% 0px", threshold: 0.2 });
     rows.forEach(function(li){ tickerObs.observe(li); });
+
+    // Safety net for timeline rows (mirror of the section reveal above).
+    setTimeout(function(){
+        rows.forEach(function(li){
+            if (li.classList.contains("reveal-in")) return;
+            li.classList.add("reveal-in");
+            var dateEl = li.querySelector(".t-date-ticker");
+            if (dateEl) dateEl.textContent = dateEl.dataset.tickerFinal;
+        });
+    }, 1500);
 })();

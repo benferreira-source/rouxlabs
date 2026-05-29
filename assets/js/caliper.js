@@ -25,9 +25,13 @@
      For the product photos (1500 px wide, panel framed at ~70%
      of frame), we use ~0.34 mm/px. Specific images can override.
 
-   Touch: tap once to drop the first jaw, tap again to drop the
-   second jaw and lock the measurement. Third tap clears and
-   starts over.
+   Touch: the caliper is a pointer-device delight only. On touch /
+   coarse-pointer devices it never engages, so a swipe that begins
+   on the product photo scrolls the page normally.
+
+   Scope: wires onto the main hero photo only — never the small
+   swatch thumbnails, cart-drawer rows, or checkout cards (all of
+   which also carry data-caliper via productSvg).
 
    ~150 lines vanilla JS. No deps. Idempotent.
    ============================================================ */
@@ -35,6 +39,13 @@
     "use strict";
     if (window.__rouxCaliper) return;
     window.__rouxCaliper = true;
+
+    // Coarse-pointer / touch devices never engage the caliper —
+    // hijacking touch on the product photo would trap page scroll.
+    // The precision-cursor metaphor is a mouse/trackpad delight.
+    var COARSE = window.matchMedia &&
+        window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    if (COARSE) return;
 
     // Selector for elements that participate in caliper mode.
     var SEL = "[data-caliper]";
@@ -201,14 +212,16 @@
     function wire(){
         document.querySelectorAll(SEL).forEach(function(el){
             if (el.__caliperWired) return;
+            // Only the main hero photo participates. productSvg() stamps
+            // data-caliper on every image it renders (swatch thumbnails,
+            // cart rows, checkout cards) — skip those so the overlay never
+            // hijacks a small clickable control.
+            if (el.closest(".thumb, .pdp-thumbs, .cart-row, .drawer-panel")) return;
             el.__caliperWired = true;
             el.addEventListener("mouseenter", onEnter);
             el.addEventListener("mouseleave", onLeave);
             el.addEventListener("mousemove", onMove);
             el.addEventListener("mousedown", onDown);
-            el.addEventListener("touchstart", function(ev){ onEnter(ev); onDown(ev); }, { passive: false });
-            el.addEventListener("touchmove",  onMove, { passive: false });
-            el.addEventListener("touchend",   onUp);
         });
     }
     document.addEventListener("mouseup", onUp);

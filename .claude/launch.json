@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["serve.py"],
       "port": 4321
+    },
+    {
+      "name": "rouxlabs-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["serve.py"],
+      "port": 4322
     }
   ]
 }
